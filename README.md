@@ -17,11 +17,7 @@
 
 ---
 
-[![agent-gfx demo: prompt, layers, review, sound, versions, render (38 s, with sound)](docs/media/agent-gfx-demo.jpg)](
-
 https://github.com/user-attachments/assets/ceb64d55-9849-45f9-aabc-f3c690831fab
-
-)
 
 <p align="center"><sub>the demo (38 s, with sound) was made in agent-gfx too: <a href="examples/gfx-demo">examples/gfx-demo</a></sub></p>
 
