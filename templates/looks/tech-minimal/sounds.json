@@ -1,0 +1,9 @@
+[
+  { "role": "tick", "sound": "sample", "src": "library/kenney/interface/Audio/tick_001.ogg", "alt": { "sound": "tick" }, "tags": ["dry", "precise"], "note": "counter steps, grid snaps; 20 ms, high; gain -10, one per step" },
+  { "role": "click", "sound": "sample", "src": "library/kenney/ui/Audio/click4.ogg", "alt": { "sound": "click" }, "tags": ["dry"], "note": "an item or row locks in" },
+  { "role": "beep", "sound": "sample", "src": "library/kenney/interface/Audio/toggle_002.ogg", "alt": { "sound": "beep", "variant": "digital" }, "tags": ["digital"], "note": "data / labels appearing; 100 ms beep, gain -8" },
+  { "role": "type", "sound": "type", "tags": ["dry"], "note": "mono text typing on; dur = the typing time, gain -10" },
+  { "role": "transition", "sound": "whoosh", "variant": "zip", "params": { "intensity": 0.25 }, "tags": ["tight"], "note": "scan-line wipe, dur 0.3" },
+  { "role": "result", "sound": "sample", "src": "library/kenney/interface/Audio/confirmation_003.ogg", "alt": { "sound": "ding" }, "tags": ["accent"], "note": "once, when the counter lands" },
+  { "role": "logo", "sound": "logo", "variant": "punch", "params": { "intensity": 0.35 }, "tags": ["tight"], "note": "end card; short, no long tail" }
+]

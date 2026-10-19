@@ -1,0 +1,9 @@
+{
+  "kind": "anime",
+  "width": 800,
+  "height": 600,
+  "fps": 30,
+  "duration": 2,
+  "style": "dark-grid",
+  "title": "review fixture (tests/review.test.mjs)"
+}

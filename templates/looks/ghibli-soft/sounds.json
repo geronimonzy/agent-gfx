@@ -1,0 +1,9 @@
+[
+  { "role": "wind", "sound": "wind", "variant": "breeze", "params": { "intensity": 0.25, "dur": 2.5 }, "tags": ["soft", "airy"], "note": "drifts, clouds passing, beat changes; a long quiet breeze bed (dur = the drift, 1.5-4 s), gain -10; `gust` for one swell" },
+  { "role": "transition", "sound": "swoosh", "variant": "wash", "params": { "intensity": 0.25 }, "tags": ["soft"], "note": "a cross-dissolve between beats, gain -9" },
+  { "role": "ui", "sound": "sample", "src": "library/kenney/impact/Audio/impactWood_light_000.ogg", "alt": { "sound": "pop", "params": { "pitch": -3 } }, "tags": ["wood", "soft"], "note": "cards and items settling: a light wooden tap, gain -8; cascades with rate 0.95-1.1" },
+  { "role": "tick", "sound": "sample", "src": "library/kenney/impact/Audio/impactWood_light_004.ogg", "alt": { "sound": "tick", "params": { "pitch": -5 } }, "tags": ["wood", "quiet"], "note": "counter steps, sparse (every 3-4th step), gain -14" },
+  { "role": "hit", "sound": "impact", "variant": "thud", "params": { "intensity": 0.25 }, "tags": ["soft", "felt"], "note": "the one landing moment, felt not heard, gain -10" },
+  { "role": "result", "sound": "sample", "src": "library/kenney/interface/Audio/glass_004.ogg", "alt": { "sound": "chime" }, "tags": ["glass", "accent"], "note": "once, when the accent number lands; soft glass chime, gain -6" },
+  { "role": "logo", "sound": "chime", "tags": ["soft", "bell"], "note": "end card: a soft chime instead of a logo hit, with a long wind under it, gain -6" }
+]

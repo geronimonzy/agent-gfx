@@ -1,0 +1,23 @@
+node_modules/
+.frugal-fable/
+out/
+dist/
+*.log
+.claude/worktrees/
+.gfx-tmp/
+# sound library (large; only the source list is tracked)
+library/*
+!library/sources.json
+# ffmpeg installed by `gfx setup ffmpeg` (<library-parent>/bin)
+/bin/*
+!/bin/gfx
+!/bin/gfx.cmd
+
+# Playwright MCP console/page logs
+.playwright-mcp/
+
+# pinned render browser (gfx setup chrome), downloaded per machine
+browsers/
+
+# private dev notebook (Claude Code loads it next to CLAUDE.md)
+CLAUDE.local.md

@@ -1,0 +1,40 @@
+/* Compare visually (vdiff.js). docs/VISUAL-DIFF.md §3 */
+:root {
+  --vdiff-picker-w: 260px;
+  --vdiff-scene-w: 150px;
+  --vdiff-wipe-knob: 14px;
+}
+.modal.vdiff { width: min(var(--dialog-w-diff), calc(100vw - var(--dialog-viewport-gap))); height: calc(100vh - var(--dialog-viewport-block-gap)); padding: var(--space-12) var(--space-14); }
+.vd-head { display: flex; align-items: center; gap: var(--space-8); flex-wrap: wrap; }
+.vd-pick { display: inline-flex; align-items: center; gap: var(--space-6); min-width: 0; font-size: var(--text-2xs); }
+.vd-pick select { width: var(--vdiff-picker-w); max-width: 30vw; }
+.vd-pick .vd-scene { width: var(--vdiff-scene-w); }
+.vd-tag { display: inline-grid; place-items: center; min-width: var(--space-18); height: var(--space-18); border-radius: var(--radius-sm); background: var(--muted); color: var(--foreground); font: 600 var(--text-3xs)/var(--space-18) var(--font-mono); }
+.vd-b .vd-tag, .vd-head .vd-pick:nth-of-type(2) .vd-tag { background: var(--primary); color: var(--primary-foreground); }
+.vd-swap { font-size: var(--text-sm); }
+.vd-stage { position: relative; flex: 1; min-height: 0; overflow: hidden; background: var(--background); border: var(--space-1) solid var(--border); border-radius: var(--radius-control); isolation: isolate; outline: none; }
+.vd-stage[data-mode=wipe] { cursor: ew-resize; }
+.vd-box { position: absolute; overflow: hidden; }
+.vd-box.vd-b { z-index: var(--z-content); }
+.vd-stage.overlay .vd-box.vd-b { pointer-events: none; }
+.vd-stage[data-mode=diff] .vd-box.vd-b { mix-blend-mode: difference; }
+.vd-frame { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; pointer-events: none; }
+.vd-msg { position: absolute; inset: 0; display: grid; place-items: center; padding: var(--space-16); text-align: center; color: var(--muted-foreground); font-size: var(--text-xs); }
+.vd-msg.err { color: var(--error-foreground); background: var(--scrim); } /* over the stale picture */
+.vd-lbl { position: absolute; left: var(--space-8); top: var(--space-8); display: flex; align-items: center; gap: var(--space-6); max-width: calc(100% - var(--space-16)); padding: var(--space-2) var(--space-8) var(--space-2) var(--space-2); border-radius: var(--radius-sm); background: var(--card); border: var(--space-1) solid var(--border); font-size: var(--text-2xs); color: var(--foreground); white-space: nowrap; }
+.vd-lbl .vd-lt { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.vd-lbl .mono { font-family: var(--font-mono); }
+/* overlay modes: A's label top-left, B's top-right (B is the right side of the wipe) */
+.vd-stage.overlay .vd-b .vd-lbl { left: auto; right: var(--space-8); }
+.vd-layer { position: absolute; inset: 0; isolation: isolate; }
+/* difference: B blends with A as a whole box (labels too), so labels hide and the legend sits in the bar */
+.vd-stage[data-mode=diff] { background: var(--media-background); }
+.vd-stage[data-mode=diff] .vd-lbl { display: none; }
+.vd-stage[data-mode=diff].boost .vd-layer { filter: brightness(4); }
+.vd-wipe { position: absolute; top: 0; bottom: 0; width: 0; z-index: var(--z-annotation); pointer-events: none; border-left: var(--space-2) solid var(--primary); translate: calc(var(--space-1) * -1) 0; }
+.vd-wipe i { position: absolute; top: 50%; left: 0; width: var(--vdiff-wipe-knob); height: var(--vdiff-wipe-knob); translate: -50% -50%; border-radius: var(--radius-round); background: var(--primary); }
+.vd-bar { display: flex; align-items: center; gap: var(--space-10); }
+.vd-scrub { flex: 1; min-width: 0; }
+.vd-time { font: var(--text-2xs)/var(--control-leading) var(--font-mono); color: var(--foreground); white-space: nowrap; }
+.vd-note, .vd-legend, .vd-boost { font-size: var(--text-2xs); white-space: nowrap; }
+.vd-legend { color: var(--foreground); }

@@ -1,0 +1,108 @@
+/* Dockable layout (layout.js, docs/LAYOUT.md): dockview theme on our variables, compact headers, panel menus */
+#stage { flex: 1; min-height: 0; position: relative; display: block; }
+#panel-holder { display: none; }
+
+/* dockview theme (dark) mapped to the studio variables; :root raises specificity over the bundled theme */
+:root .dockview-theme-dark {
+  --dv-group-view-background-color: var(--card);
+  --dv-tabs-and-actions-container-background-color: var(--card);
+  --dv-tabs-and-actions-container-height: var(--space-20);
+  --dv-tabs-and-actions-container-font-size: var(--text-2xs);
+  --dv-tab-font-size: var(--text-2xs);
+  --dv-activegroup-visiblepanel-tab-background-color: var(--card);
+  --dv-activegroup-hiddenpanel-tab-background-color: transparent;
+  --dv-inactivegroup-visiblepanel-tab-background-color: var(--card);
+  --dv-inactivegroup-hiddenpanel-tab-background-color: transparent;
+  --dv-activegroup-visiblepanel-tab-color: var(--foreground);
+  --dv-activegroup-hiddenpanel-tab-color: var(--muted-foreground);
+  --dv-inactivegroup-visiblepanel-tab-color: var(--foreground);
+  --dv-inactivegroup-hiddenpanel-tab-color: var(--muted-foreground);
+  --dv-tab-divider-color: var(--border);
+  --dv-separator-border: var(--border);
+  --dv-paneview-header-border-color: var(--border);
+  --dv-drag-over-background-color: var(--selection);
+  --dv-drag-over-border-color: var(--primary);
+  --dv-active-sash-color: var(--primary);
+  --dv-icon-hover-background-color: var(--accent);
+  --dv-floating-box-shadow: var(--shadow-overlay);
+  --dv-floating-border: var(--space-1) solid var(--input);
+  --dv-tabs-container-scrollbar-color: var(--input);
+  --dv-scrollbar-background-color: var(--input);
+  --dv-floating-titlebar-height: var(--space-18);
+  font-family: var(--font-sans);
+  color: var(--foreground);
+}
+.gfx-dock .dv-tab { padding: 0 var(--space-2) 0 var(--space-8); }
+.gfx-dock .dv-tabs-and-actions-container { border-bottom: var(--space-1) solid var(--border); box-sizing: border-box; }
+
+/* our tab: grip (compact bar only) + title + close (hover / active only) */
+.gfx-tab { display: flex; align-items: center; gap: calc(var(--space-4) + var(--space-1)); height: 100%; white-space: nowrap; font-size: var(--text-2xs); line-height: round(nearest, calc(var(--control-leading) * 1em), var(--space-1)); }
+.gfx-tab-t { overflow: hidden; text-overflow: ellipsis; }
+.gfx-tab-x { width: calc(var(--space-14) + var(--space-1)); height: calc(var(--space-14) + var(--space-1)); display: inline-grid; place-items: center; padding-inline: 0; border: 0; border-radius: var(--radius-sm); background: none; color: var(--muted-foreground); font-size: var(--text-sm); line-height: round(nearest, calc(var(--control-leading) * 1em), var(--space-1)); visibility: hidden; }
+.dv-tab:hover .gfx-tab-x, .dv-active-tab .gfx-tab-x { visibility: visible; }
+.gfx-tab-x:hover { background: var(--accent); color: var(--foreground); }
+.gfx-grip { display: none; width: var(--space-8); height: var(--space-10); flex: none; opacity: .7;
+  background: radial-gradient(circle, var(--muted-foreground) var(--space-1), transparent var(--dock-grip-dot-edge)) 0 0 / var(--space-4) var(--space-4); cursor: grab; }
+.dv-tab .gfx-tab, .dv-tab { cursor: default; }
+
+/* header actions: the ⋯ menu button */
+.gfx-head-actions { display: flex; align-items: center; height: 100%; padding: 0 calc(var(--space-2) + var(--space-1)); }
+.gfx-more { width: var(--space-20); height: calc(var(--space-16) + var(--space-1)); padding-inline: 0; border: 0; border-radius: var(--radius-sm); background: none; color: var(--muted-foreground); font: 500 var(--text-xs)/round(nearest, calc(var(--control-leading) * 1em), var(--space-1)) var(--font-sans); letter-spacing: 0; }
+.gfx-more:hover { background: var(--accent); color: var(--foreground); }
+
+/* compact header (§3a): a single-panel group has no tab bar, only a 4 px grip line at the top edge that turns into an
+   18 px overlay bar (name, drag handle, ⋯) after 200 ms of hover or while anything is being dragged */
+.gfx-compact { position: relative; }
+.gfx-compact > .dv-tabs-and-actions-container,
+.gfx-compact .dv-groupview > .dv-tabs-and-actions-container {
+  position: absolute; top: 0; left: 0; right: 0; z-index: var(--z-panel-header); height: var(--space-4); overflow: hidden;
+  background: transparent; border-bottom: 0; transition: height var(--motion-none) linear var(--motion-none), background-color var(--motion-none) linear var(--motion-none);
+}
+.gfx-compact > .dv-tabs-and-actions-container::before,
+.gfx-compact .dv-groupview > .dv-tabs-and-actions-container::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: var(--space-2); background: var(--input); pointer-events: none;
+}
+.gfx-compact .dv-tabs-and-actions-container:hover,
+.gfx-dragging .gfx-compact .dv-tabs-and-actions-container,
+.gfx-compact.gfx-menu-open .dv-tabs-and-actions-container,
+.gfx-compact .dv-groupview.gfx-menu-open > .dv-tabs-and-actions-container {
+  height: var(--space-18); background: var(--overlay-background); box-shadow: 0 var(--space-2) var(--space-8) var(--shadow-ink); transition-delay: var(--motion-slow);
+}
+.gfx-dragging .gfx-compact .dv-tabs-and-actions-container, .gfx-compact.gfx-menu-open .dv-tabs-and-actions-container { transition-delay: var(--motion-none); }
+.gfx-compact .dv-tabs-and-actions-container:hover::before { background: var(--primary); }
+.gfx-compact .dv-tabs-and-actions-container > * { opacity: 0; transition: opacity var(--motion-none) linear var(--motion-none); }
+.gfx-compact .dv-tabs-and-actions-container:hover > *,
+.gfx-dragging .gfx-compact .dv-tabs-and-actions-container > *,
+.gfx-compact.gfx-menu-open .dv-tabs-and-actions-container > * { opacity: 1; transition-delay: var(--motion-slow); }
+.gfx-dragging .gfx-compact .dv-tabs-and-actions-container > *, .gfx-compact.gfx-menu-open .dv-tabs-and-actions-container > * { transition-delay: var(--motion-none); }
+.gfx-compact .dv-tab { height: var(--space-18); background: transparent !important; padding: 0 var(--space-4) 0 var(--space-6); cursor: grab; }
+.gfx-compact .gfx-grip { display: block; }
+.gfx-compact .gfx-tab-x { display: none; }
+.gfx-compact .dv-tab::after, .gfx-compact .dv-tab::before { display: none !important; }
+.gfx-compact .gfx-head-actions { height: var(--space-18); }
+.gfx-compact .dv-content-container { height: 100%; }
+
+/* panel content fills its dock slot (the fixed-size rules of the old layout don't apply in the dock) */
+.gfx-panel { width: 100%; height: 100%; display: flex; flex-direction: column; overflow: hidden; background: var(--card); }
+.gfx-panel > .in-dock { flex: 1 1 auto; min-width: 0; min-height: 0; width: auto !important; height: auto !important; max-height: none; border: 0 !important; }
+.gfx-panel > #inspector { overflow: auto; }
+.gfx-panel > #timeline { background: var(--background); }
+.gfx-panel > #code-refs { display: block; overflow: auto; padding: var(--space-8) var(--space-12); background: var(--card); }
+.gfx-panel > #code-refs:empty::before { content: "Select an element in the picture or put the cursor on a line: the code that creates and animates it is listed here."; color: var(--muted-foreground); --leading: var(--empty-leading); line-height: round(nearest, calc(var(--leading) * 1em), var(--leading-step)); }
+
+/* a narrow viewer (docked beside other panels, or a small pop-out) drops the transport's secondary controls */
+#viewer { container-type: inline-size; }
+#transport { min-width: 0; overflow: hidden; }
+#transport .tc { flex: none; white-space: nowrap; }
+@container (max-width: 1000px) { #transport .master { display: none; } }
+@container (max-width: 720px) { #transport #rate { display: none; } #transport { gap: var(--space-4); padding-inline: var(--space-6); } }
+@container (max-width: 520px) { #transport .tc.dim, #transport #loop-btn { display: none; } }
+/* A/B and Fit never shrink (a clipped Draft could not be clicked); narrow viewers show A / B (shortcut A) and drop the
+   duration. */
+#transport :is(#ab, #fit-btn) { flex: none; }
+#ab .ab-short { display: none; }
+@container (max-width: 440px) { #ab .ab-long, #transport #tc-dur { display: none; } #ab .ab-short { display: inline; } }
+
+#panels-btn.on { border-color: var(--primary); }
+
+.gfx-compact .gfx-more { height: var(--space-16); }

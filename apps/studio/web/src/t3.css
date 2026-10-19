@@ -1,0 +1,90 @@
+/* T3 (docs/T3.md, t3.js): top-bar button + badge, panel (threads list over the native T3 view), settings, Ask target */
+.t3-btn { display: inline-flex; align-items: center; gap: var(--gap-1); position: relative; }
+.t3-mark { width: var(--space-8); height: var(--space-8); border-radius: var(--radius-xs); background: var(--info-foreground); }
+.t3-btn.t3-off .t3-mark { background: var(--muted-foreground); }
+.t3-badge { min-width: calc(var(--space-14) + var(--space-1)); height: var(--status-h); padding-inline: var(--space-4); border-radius: var(--radius-control); background: var(--warning-foreground); color: var(--card); display: inline-flex; align-items: center; justify-content: center; font: 500 var(--text-3xs)/var(--control-leading) var(--font-sans); text-align: center; }
+.t3-badge[hidden] { display: none; }
+
+#t3 { display: flex; flex-direction: column; min-height: 0; height: 100%; overflow: hidden; background: var(--card); font-size: var(--text-xs); }
+#t3-head { display: flex; align-items: center; gap: var(--space-6); padding: calc(var(--space-4) + var(--space-1)) var(--space-8); border-bottom: var(--space-1) solid var(--border); flex: none; }
+#t3-head .seg button { height: 100%; padding-inline: var(--control-pad); font-size: var(--text-2xs); }
+#t3-head .tbtn { height: var(--control-h); font-size: var(--text-2xs); }
+#t3-refresh.busy { animation: t3-spin var(--motion-metronome) linear infinite; }
+@keyframes t3-spin { to { transform: rotate(360deg); } }
+#t3-newrow { display: flex; gap: var(--space-6); padding: var(--space-6) var(--space-8); border-bottom: var(--space-1) solid var(--border); flex: none; }
+#t3-newrow[hidden] { display: none; }
+#t3-newrow input { flex: 1; min-width: 0; }
+#t3-note { flex: none; max-height: 55%; overflow: auto; padding: var(--space-6) var(--space-8) 0; scrollbar-width: thin; }
+#t3-note:empty { display: none; }
+#t3-note:has(.t3-connect) { max-height: 80%; }
+.t3-msg { padding: var(--space-8) var(--space-10); margin-bottom: var(--space-6); border: var(--space-1) solid var(--border); border-radius: var(--radius-control); background: var(--code-background); color: var(--foreground); --leading: var(--leading-loose); line-height: round(nearest, calc(var(--leading) * 1em), var(--leading-step)); }
+.t3-in { padding: var(--space-2) var(--space-2) var(--space-6); color: var(--muted-foreground); font-size: var(--text-2xs); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.t3-in b { color: var(--foreground); font-weight: 600; }
+.t3-msg small { display: block; color: var(--muted-foreground); margin-top: var(--space-4); }
+.t3-path { display: block; margin: calc(var(--space-4) + var(--space-1)) 0; padding: var(--space-4) var(--space-6); --leading: var(--leading-normal-mono); font: var(--text-2xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); background: var(--background); border-radius: var(--radius-sm); word-break: break-all; user-select: all; }
+.t3-btns { display: flex; gap: var(--space-6); margin-top: var(--space-8); }
+.t3-err { color: var(--error-foreground); font-size: var(--text-2xs); margin: var(--space-4) 0 var(--space-6); word-break: break-word; }
+/* Connect T3: two steps (docs/T3.md §2) */
+.t3-step { margin-top: var(--space-8); padding: var(--space-6) 0 0 var(--space-10); border-left: var(--space-2) solid var(--border); color: var(--muted-foreground); }
+.t3-step.on { border-left-color: var(--info-foreground); color: var(--foreground); }
+.t3-step.done { border-left-color: var(--stem-hits); }
+.t3-step-h { margin-bottom: var(--space-4); }
+.t3-ok { color: var(--stem-hits); font-size: var(--text-2xs); }
+.t3-field { display: flex; flex-direction: column; gap: calc(var(--space-2) + var(--space-1)); margin: var(--space-6) 0 var(--space-2); font-size: var(--text-2xs); color: var(--muted-foreground); }
+.t3-field input { width: 100%; min-width: 0; font-size: var(--text-2xs); font-weight: 400; font-family: var(--font-mono); line-height: var(--control-leading); }
+.t3-access { display: grid; gap: var(--space-2); margin: var(--space-2) 0 var(--space-4); font-size: var(--text-2xs); color: var(--muted-foreground); }
+.t3-access label { display: flex; align-items: baseline; gap: var(--space-6); cursor: pointer; }
+.t3-access b { color: var(--foreground); font-weight: 600; }
+.t3-ph-empty { color: var(--muted-foreground); }
+.t3-ph-empty b { color: var(--foreground); font-weight: 600; }
+
+#t3-list { flex: 0 1 auto; max-height: 40%; min-height: 0; overflow: auto; padding: var(--space-4) 0; border-bottom: var(--space-1) solid var(--border); scrollbar-width: thin; }
+#t3-list[hidden] { display: none; }
+.t3-group { display: flex; align-items: baseline; gap: var(--space-6); padding: var(--space-6) var(--space-10) calc(var(--space-2) + var(--space-1)); font-size: var(--text-3xs); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted-foreground); }
+.t3-group.mine { color: var(--info-foreground); }
+.t3-group small { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--muted-foreground); font-family: var(--font-mono); }
+.t3-row { display: flex; align-items: center; gap: var(--space-8); width: 100%; padding: var(--space-4) var(--space-10); background: none; border: 0; border-left: var(--space-2) solid transparent; border-radius: var(--radius-none); color: var(--foreground); text-align: left; cursor: pointer; }
+.t3-row:hover { background: var(--accent); }
+.t3-row.on { background: var(--info-surface); border-left-color: var(--info-foreground); }
+.t3-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.t3-meta { flex: none; max-width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted-foreground); --leading: var(--leading-normal-mono); font: var(--text-2xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); }
+/* a thread above gfx's access (its runtime mode is broader): openable, but Send to T3 can't reach it (title says why) */
+.t3-row.above .t3-title { color: var(--muted-foreground); }
+.t3-row.above .t3-meta::before { content: "above access · "; color: var(--warning-border); }
+.t3-dot { flex: none; width: var(--space-8); height: var(--space-8); border-radius: var(--radius-round); background: var(--muted-foreground); }
+.t3-dot.running { background: var(--info-foreground); box-shadow: 0 0 0 var(--space-2) var(--info-surface); animation: t3-blink var(--motion-record-pulse) ease-in-out infinite; }
+.t3-dot.waiting { background: var(--warning-foreground); box-shadow: 0 0 0 var(--space-2) var(--warning-surface); }
+.t3-dot.done { background: var(--stem-hits); }
+.t3-dot.failed { background: var(--error-foreground); }
+@keyframes t3-blink { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .t3-dot.running, #t3-refresh.busy { animation: none; } }
+.t3-empty { padding: var(--space-6) var(--space-12); color: var(--muted-foreground); font-size: var(--text-2xs); }
+
+/* min-height 0: the view shrinks with a short panel instead of being pushed below it (the native view is clipped to the
+   visible panel rect in t3.js anyway: it must never extend past the panel or the window, or T3's page cannot scroll) */
+#t3-view { position: relative; flex: 1 1 auto; min-height: 0; background: var(--background); }
+#t3-view-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-8); padding: var(--space-12); color: var(--muted-foreground); text-align: center; }
+#t3-view-ph a { color: var(--info-foreground); }
+.t3-ph-dim { color: var(--input); }
+
+/* settings: T3 connection */
+.t3-st { display: flex; align-items: center; gap: var(--space-8); padding-left: var(--t3-approval-indent); font-size: var(--text-xs); }
+.t3-st i { width: var(--space-8); height: var(--space-8); border-radius: var(--radius-round); background: var(--muted-foreground); flex: none; }
+.t3-st.on i { background: var(--stem-hits); }
+.t3-st.warn i { background: var(--warning-foreground); }
+.t3-levels { margin: 0 0 0 var(--t3-approval-indent); padding: 0; list-style: none; display: grid; gap: calc(var(--space-2) + var(--space-1)); font-size: var(--text-2xs); color: var(--muted-foreground); }
+.t3-levels li { padding: calc(var(--space-2) + var(--space-1)) var(--space-8); border: var(--space-1) solid transparent; border-radius: var(--radius-sm); }
+.t3-levels li b { color: var(--foreground); font-weight: 600; }
+.t3-levels li.on { border-color: var(--info-border); background: var(--info-surface); }
+.st-row .chk.off { opacity: .5; }
+
+/* Ask Claude: T3 target */
+.ask-t3 { display: inline-flex; align-items: center; gap: var(--space-6); }
+.ask-t3 select { max-width: var(--t3-thread-select-w); height: var(--control-h); font-size: var(--text-2xs); }
+.ask-t3-err { display: flex; align-items: baseline; gap: var(--space-8); margin: 0 var(--space-14) var(--space-10); padding: var(--space-6) var(--space-10); border: var(--space-1) solid var(--error-surface); border-radius: var(--radius-control); background: var(--error-surface); color: var(--error-foreground); font-size: var(--text-xs); --leading: var(--textarea-leading-prose); line-height: round(nearest, calc(var(--leading) * 1em), var(--leading-step)); }
+.ask-t3-err[hidden] { display: none; }
+.ask-t3-err span { flex: 1; min-width: 0; word-break: break-word; }
+.ask-t3-err button { flex: none; }
+
+.ask-t3-err { box-sizing: border-box; height: calc(2 * var(--control-h)); flex-shrink: 0; overflow: auto; }
+.ask-t3-err [data-a="t3-access"][hidden] { display: inline-flex !important; visibility: hidden; }

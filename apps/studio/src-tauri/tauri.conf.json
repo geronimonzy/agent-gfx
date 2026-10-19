@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "gfx studio",
+  "version": "0.2.0",
+  "identifier": "dev.gfx.studio",
+  "build": {
+    "frontendDist": "../web/dist"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "create": false,
+        "title": "gfx studio",
+        "width": 1600,
+        "height": 1000,
+        "minWidth": 1100,
+        "minHeight": 700,
+        "backgroundColor": "#14171f",
+        "center": true,
+        "dragDropEnabled": false
+      }
+    ],
+    "security": {
+      "csp": {
+        "default-src": "'self'",
+        "script-src": "'self'",
+        "style-src": "'self' 'unsafe-inline'",
+        "img-src": "'self' data: blob: gfxlib: http://gfxlib.localhost http://127.0.0.1:* http://localhost:*",
+        "media-src": "'self' data: blob: gfxlib: http://gfxlib.localhost http://127.0.0.1:* http://localhost:*",
+        "font-src": "'self' data:",
+        "connect-src": "'self' ipc: http://ipc.localhost gfxlib: http://gfxlib.localhost blob: data: http://127.0.0.1:* http://localhost:* ws://127.0.0.1:* ws://localhost:*",
+        "frame-src": "http://127.0.0.1:* http://localhost:*",
+        "worker-src": "'self'",
+        "object-src": "'none'",
+        "base-uri": "'self'",
+        "form-action": "'none'"
+      },
+      "dangerousDisableAssetCspModification": ["style-src"]
+    }
+  },
+  "bundle": {
+    "active": false,
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/icon.ico"]
+  }
+}

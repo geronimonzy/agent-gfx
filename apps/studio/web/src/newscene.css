@@ -1,0 +1,85 @@
+/* New scene window (newscene.js, docs/LOOKS.md §4) + its top-bar / empty-state entry points. Looks follow the welcome
+   window's New project wizard (cards, uppercase field labels). */
+#ns-dlg.modal-back { z-index: var(--z-modal-backdrop); }
+.modal.ns { width: min(var(--dialog-w-lg), calc(100vw - var(--dialog-viewport-gap))); max-height: calc(100vh - var(--dialog-viewport-gap)); padding: 0; gap: 0; }
+.modal.ns .modal-head { padding: var(--space-14) var(--space-18) var(--space-10); border-bottom: var(--space-1) solid var(--border); }
+.modal.ns .modal-head b { font-size: var(--text-sm); }
+.ns-sub { --leading: var(--leading-normal-mono); font: var(--text-2xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); }
+.ns-form { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+.ns-body { overflow: auto; padding: var(--space-14) var(--space-18) var(--space-6); display: flex; flex-direction: column; gap: var(--space-14); min-height: 0; }
+.ns-f { display: flex; flex-direction: column; gap: var(--space-6); min-width: 0; }
+.ns-l { display: inline-flex; align-items: center; gap: var(--gap-1); --leading: var(--label-leading); line-height: round(nearest, calc(var(--leading) * 1em), var(--leading-step)); color: var(--muted-foreground); font-size: var(--text-2xs); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+.ns-f input[type=text], .ns-f textarea { width: 100%; font-size: var(--text-sm); }
+.ns-f input[type=text] { height: var(--control-h); }
+#ns-name { font-size: var(--text-sm); font-family: var(--font-mono); }
+#ns-name[readonly] { color: var(--muted-foreground); }
+#ns-prompt { height: auto; min-height: var(--newscene-prompt-min-h); resize: vertical; --leading: var(--textarea-leading-prose); line-height: round(nearest, calc(var(--leading) * 1em), var(--leading-step)); padding: var(--space-8) var(--space-10); }
+.ns-msg { color: var(--muted-foreground); font-size: var(--text-2xs); min-height: 0; }
+.ns-msg:empty { display: none; }
+.ns-msg.err, .ns-warn { color: var(--error-foreground); }
+.ns-f [aria-invalid=true] { border-color: var(--error-foreground); }
+
+.ns-drop { display: flex; align-items: center; gap: var(--space-10); padding: var(--space-12) var(--space-14); border: var(--space-1) dashed var(--input); border-radius: var(--radius-control); color: var(--muted-foreground); background: var(--overlay-background); }
+.ns-drop.over { border-color: var(--primary); background: var(--selection); color: var(--foreground); }
+.ns-pair { display: flex; gap: var(--space-6); }
+.ns-pair input { flex: 1; min-width: 0; }
+.ns-pair .tbtn { height: var(--control-h); flex: none; white-space: nowrap; }
+.ns-refs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-4); }
+.ns-refs:empty { display: none; }
+.ns-refs li { display: grid; grid-template-columns: var(--newscene-reference-tag-w) minmax(var(--newscene-reference-name-min-w), var(--newscene-reference-name-max-w)) minmax(0, 1fr) auto; align-items: center; gap: var(--space-8); padding: var(--space-4) var(--space-6) var(--space-4) var(--space-8); border: var(--space-1) solid var(--border); border-radius: var(--radius-control); background: var(--card); }
+.ns-rtag { justify-self: start; font: var(--text-3xs)/var(--control-leading) var(--font-mono); --control-pad-block: var(--space-1); padding-inline: var(--space-6); border-radius: var(--radius-control); background: var(--accent); color: var(--muted-foreground); }
+.ns-rtag.file { background: var(--selection); color: var(--primary-text); }
+.ns-rtag.link { background: var(--info-surface); color: var(--info-foreground); }
+.ns-rname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; --leading: var(--leading-normal-mono); font: var(--text-2xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); }
+.ns-refs .ns-rnote { min-width: 0; height: var(--space-24); font-size: var(--text-xs); }
+.ns-rdel { font-size: var(--text-base); text-decoration: none; padding-inline: var(--space-4); }
+
+.ns-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--newscene-take-min-w), 1fr)); gap: var(--space-6); }
+.ns-chip { position: relative; display: block; cursor: pointer; }
+.ns-chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.ns-chip span { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-8) var(--space-10); border-radius: var(--radius-control); border: var(--space-1) solid var(--border); background: var(--card); height: 100%; }
+.ns-chip b { font-size: var(--text-xs); }
+.ns-chip small { color: var(--muted-foreground); font-size: var(--text-2xs); --leading: var(--leading-tight); line-height: round(nearest, calc(var(--leading) * 1em), var(--leading-step)); }
+.ns-chip:hover span { border-color: var(--input); }
+.ns-chip input:checked + span { border-color: var(--primary); background: var(--selection); }
+.ns-chip input:focus-visible + span { outline: var(--focus-width) solid var(--ring); outline-offset: calc(-1 * var(--focus-width)); }
+.ns-row { display: flex; align-items: center; gap: var(--space-12); flex-wrap: wrap; }
+.ns-inl { display: inline-flex; align-items: center; gap: var(--space-6); color: var(--muted-foreground); }
+.ns-custom input, .ns-inl input[type=number] { width: var(--newscene-number-w); }
+#ns-look { max-width: var(--newscene-look-max-w); min-width: 0; }
+.ns-seg label { position: relative; display: inline-flex; height: 100%; }
+.ns-seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.ns-seg label span { display: inline-flex; align-items: center; justify-content: center; line-height: var(--control-leading); font-weight: 500; padding-inline: var(--control-pad); height: 100%; color: var(--muted-foreground); }
+.ns-seg label + label span { border-left: var(--space-1) solid var(--border); }
+.ns-seg input:checked + span { background: var(--card); color: var(--foreground); box-shadow: inset 0 0 0 var(--space-1) var(--border); font-weight: 500; }
+.ns-seg input:is(:focus-visible, .is-focus) + span { outline: var(--focus-width) solid var(--ring); outline-offset: calc(-1 * var(--focus-width)); }
+.ns-seg input:disabled + span { opacity: var(--disabled-opacity); cursor: default; }
+
+.ns-status { margin: 0 var(--space-18); padding: var(--space-8) var(--space-10); border-radius: var(--radius-control); display: flex; align-items: center; gap: var(--space-8); background: var(--selection); color: var(--primary-text); }
+.ns-status.err { background: var(--error-surface); color: var(--error-foreground); }
+.modal.ns .modal-foot { padding: var(--space-10) var(--space-18) var(--space-14); }
+.modal.ns .modal-foot .tbtn { flex: none; white-space: nowrap; height: var(--control-h); padding-inline: var(--space-14); }
+.ns-foot { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ns-foot code { --leading: var(--leading-normal-mono); font: var(--text-2xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); }
+
+/* entry points */
+#scene-new { font: 600 var(--text-base)/var(--control-leading) var(--font-sans); }
+#brief-btn { padding-inline: var(--space-8); }
+#empty-new { position: absolute; z-index: var(--z-panel-controls); margin-top: var(--newscene-empty-offset); height: var(--space-30); padding-inline: var(--space-16); }
+#video-wrap.has-video #empty-new { display: none; }
+
+/* Inline labels share the even controls' centre; all dimensions come from the shared scale. */
+.ns-row, .ns-inl, .ns-drop, .ns-refs li, .ns-status, .modal.ns .modal-foot { --leading-step: var(--space-2); }
+
+.ns-custom-row { min-height: var(--control-h); flex: none; }
+.ns-custom-row [hidden] { display: inline-flex !important; visibility: hidden; }
+.ns-custom { display: inline-flex; align-items: center; gap: var(--space-6); }
+.ns-msg { height: var(--space-32); flex: none; overflow: auto; }
+.ns-msg:empty { display: block; }
+.ns-messages { height: calc(3 * var(--space-24)); flex: none; overflow: auto; }
+.ns-status { align-items: flex-start; overflow-wrap: anywhere; }
+.ns-status span { min-width: 0; }
+.ns-status .spin { flex: none; }
+#ns-create { min-width: calc(5 * var(--space-32)); }
+#ns-take-msg { height: calc(2 * var(--space-20)); }
+#ns-fmt-msg { flex-basis: 100%; }

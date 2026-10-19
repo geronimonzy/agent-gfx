@@ -1,0 +1,5 @@
+{ "presets": [
+  { "id": "half", "label": "Right half, 2x", "crop": "100,0,100,50", "scale": 2, "format": "png" },
+  { "id": "square-pad", "label": "Square, padded", "size": "100x100", "fit": "contain", "pad": "#ff00ff", "format": "png" },
+  { "id": "fastdraft", "label": "Fast draft", "mode": "fast", "frame-format": "jpeg" }
+] }

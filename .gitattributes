@@ -1,0 +1,2 @@
+*.cmd text eol=crlf
+bin/gfx text eol=lf

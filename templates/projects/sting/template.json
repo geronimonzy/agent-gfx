@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "title": "Logo sting",
+  "description": "4 s 16:9 logo reveal: a ring draws on, a burst at the hit, the mark pops in and the wordmark slides out.",
+  "tags": ["16:9", "logo", "intro"],
+  "preview": { "scene": "sting", "t": 3.5 }
+}

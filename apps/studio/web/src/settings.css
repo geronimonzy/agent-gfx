@@ -1,0 +1,165 @@
+/* Settings page (settings.js, docs/HOME-SETTINGS.md §2): T3's structure (breadcrumb, left nav + search, sections of row
+   cards) in the studio's own theme. The workspace under it is only hidden (visibility), so it comes back as it was. */
+body.settings-on #app { visibility: hidden; }
+#settings-page { line-height: var(--settings-leading); position: fixed; inset: 0; z-index: var(--z-page); display: flex; flex-direction: column; background: var(--background); }
+#settings-page[hidden] { display: none; }
+.sp-head { display: flex; align-items: center; gap: var(--space-12); height: var(--settings-header-h); padding: 0 var(--space-12); background: var(--card); border-bottom: var(--space-1) solid var(--border); flex: none; }
+.sp-crumb { display: flex; align-items: baseline; gap: var(--space-6); color: var(--muted-foreground); font-size: var(--text-sm); }
+/* a px leading must name the children too: :where(*) recomputes each element from --leading (DESIGN.md §6) */
+.sp-crumb, .sp-crumb > * { line-height: var(--settings-leading); }
+.sp-crumb i { font-style: normal; color: var(--muted-foreground); }
+.sp-crumb b { color: var(--foreground); font-weight: 600; }
+.sp-body { flex: 1; min-height: 0; display: grid; grid-template-columns: var(--settings-nav-w) minmax(0, 1fr); }
+
+/* left nav: search + categories (search results replace the categories while typing) */
+.sp-nav { display: flex; flex-direction: column; gap: var(--space-10); min-height: 0; padding: var(--space-12) var(--space-10); background: var(--card); border-right: var(--space-1) solid var(--border); overflow: auto; }
+.sp-search { display: flex; align-items: center; gap: var(--space-6); height: var(--settings-search-h); flex: none; padding: 0 var(--space-6) 0 var(--space-8); border: var(--space-1) solid var(--border); border-radius: var(--radius-control); background: var(--code-background); color: var(--muted-foreground); }
+.sp-search:hover { border-color: var(--input-hover); }
+.sp-search:has(:focus-visible, .is-focus) { outline: var(--focus-width) solid var(--ring); outline-offset: calc(-1 * var(--focus-width)); }
+.sp-search svg { width: var(--space-14); height: var(--space-14); flex: none; }
+.sp-search input { flex: 1; min-width: 0; height: 100%; border: 0; background: none; padding-inline: 0; outline: none; color: var(--foreground); }
+.sp-search input::-webkit-search-cancel-button { display: none; }
+.sp-search kbd { margin: 0; }
+.sp-q-clear { width: var(--space-18); height: var(--space-18); padding-inline: 0; border: 0; border-radius: var(--radius-sm); background: none; color: var(--muted-foreground); font-size: var(--text-sm); line-height: var(--control-leading); }
+.sp-q-clear:hover { background: var(--accent); color: var(--foreground); }
+.sp-cats, .sp-results { display: flex; flex-direction: column; gap: var(--space-1); }
+.sp-cats[hidden], .sp-results[hidden] { display: none; }
+.sp-cats button, .sp-results button { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1); width: 100%; min-height: var(--space-28); padding: calc(var(--space-4) + var(--space-1)) calc(var(--space-8) + var(--space-1)); border: 0; border-radius: var(--radius-control); background: none; color: var(--foreground); text-align: left; line-height: var(--settings-leading); }
+.sp-cats button:hover, .sp-results button:hover { background: var(--accent); }
+.sp-cats button.on, .sp-results button.on { background: var(--surface-raised); color: var(--foreground); box-shadow: inset var(--space-2) 0 0 var(--primary); }
+.sp-results button b { font-weight: 500; }
+.sp-results button small { color: var(--muted-foreground); font-size: var(--text-2xs); }
+.sp-none { margin: 0; padding: var(--space-20) var(--space-4); text-align: center; color: var(--muted-foreground); font-size: var(--text-2xs); }
+
+/* body: sections (muted heading + a card of rows) */
+.sp-main { min-height: 0; overflow: auto; scrollbar-gutter: stable both-edges; }
+.sp-page { max-width: var(--settings-content-w); margin: 0 auto; padding: var(--space-26) var(--space-28) var(--page-bottom-pad); display: flex; flex-direction: column; gap: var(--space-26); }
+.sp-scope { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-6) var(--space-8); padding: 0 var(--settings-title-inset); color: var(--muted-foreground); font-size: var(--text-sm); }
+.sp-scope select { font-weight: 500; color: var(--foreground); }
+.sp-scope-hint { flex-basis: 100%; font-size: var(--text-2xs); color: var(--muted-foreground); }
+.sp-sec { display: flex; flex-direction: column; gap: var(--space-8); }
+.sp-sec h2 { margin: 0; padding: 0 var(--settings-title-inset); font-size: var(--text-xs); font-weight: 500; color: var(--muted-foreground); }
+.sp-card { border: var(--space-1) solid var(--border); border-radius: var(--radius); background: var(--card); }
+.sp-row { container-type: inline-size; padding: var(--space-12) var(--space-16); border-radius: var(--radius); outline: none; }
+.sp-row + .sp-row { border-top: var(--space-1) solid var(--border); border-radius: var(--radius-none); }
+.sp-row:last-child { border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius); }
+.sp-row:is(:focus-visible, .is-focus) { outline: var(--focus-width) solid var(--ring); outline-offset: calc(-1 * var(--focus-width)); }
+.sp-main-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-24); }
+@container (max-width: 520px) { .sp-main-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-10); } .sp-main-row .sp-ctl { justify-content: flex-start; } .sp-main-row .sp-stack { align-items: flex-start; } }
+.sp-text { min-width: 0; display: flex; flex-direction: column; gap: var(--space-4); }
+.sp-title { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-6); min-height: var(--space-20); }
+.sp-title h3 { margin: 0; line-height: var(--settings-leading); font-size: var(--text-sm); font-weight: 500; color: var(--foreground); }
+.sp-desc { margin: 0; max-width: var(--settings-description-w); color: var(--muted-foreground); font-size: var(--text-2xs); line-height: var(--settings-detail-leading); }
+.sp-note { margin: 0; color: var(--warning-foreground); font-size: var(--text-2xs); }
+.sp-row.ro .sp-title h3 { color: var(--muted-foreground); }
+.sp-err { margin: var(--space-2) 0 0; color: var(--error-foreground); font-size: var(--text-2xs); }
+.sp-ctl { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--space-8); min-width: 0; }
+.sp-ctl select { width: var(--settings-field-w); max-width: 100%; }
+.sp-ctl input[type=text] { width: var(--settings-field-w); max-width: 100%; }
+.sp-ctl .mono, .sp-path.mono, .sp-val.mono { font-size: var(--text-2xs); font-weight: 400; font-family: var(--font-mono); line-height: var(--settings-detail-leading); }
+/* Plex at +1px follows the calibrated number-field size; preserve the original line-box ratio. */
+.sp-ctl input.mono { font-size: calc(var(--text-2xs) + var(--settings-mono-field-step)); line-height: round(nearest, calc(var(--control-leading) * 1em), var(--space-1)); }
+.sp-pair { display: flex; align-items: center; gap: var(--space-6); min-width: 0; max-width: 100%; }
+.sp-pair :is(input, select) { min-width: 0; flex: 1 1 auto; }
+.sp-pair input[type=text]:not(:focus) { text-overflow: ellipsis; }
+.sp-pair button { flex: none; white-space: nowrap; }
+.sp-stack { display: flex; flex-direction: column; align-items: flex-end; gap: var(--settings-stack-gap); min-width: 0; max-width: 100%; }
+.sp-btns { display: flex; flex-wrap: wrap; gap: var(--space-8); justify-content: flex-end; }
+.sp-chk input { width: var(--space-16); height: var(--space-16); }
+.sp-val { display: inline-flex; align-items: center; gap: var(--space-6); color: var(--muted-foreground); }
+.sp-val .dot { width: var(--space-8); height: var(--space-8); border-radius: var(--radius-round); background: var(--muted-foreground); }
+.sp-val.ok { color: var(--stem-hits); } .sp-val.ok .dot { background: var(--stem-hits); }
+.sp-val.bad { color: var(--error-foreground); } .sp-val.bad .dot { background: var(--stem-motion); }
+/* a fixed cap: a percentage counts as "none" when the grid sizes the control column, so a long path took the whole row */
+.sp-path { max-width: var(--settings-path-max-w); color: var(--muted-foreground); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; direction: rtl; text-align: right; }
+.sp-text, .sp-val, .sp-err, .sp-chain { overflow-wrap: anywhere; }
+.sp-prog { display: flex; flex-direction: column; gap: var(--space-4); width: var(--settings-progress-w); }
+
+/* ↺ reset and the inheritance marker (click: the resolution chain in an anchored popover) */
+.sp-reset { width: var(--space-20); height: var(--space-20); padding-inline: 0; border: 0; border-radius: var(--radius-sm); background: none; color: var(--muted-foreground); font-size: var(--text-sm); line-height: var(--control-leading); }
+.sp-reset:hover { background: var(--accent); color: var(--foreground); }
+.sp-inh { position: relative; width: var(--space-16); height: var(--space-16); padding-inline: 0; border: 0; border-radius: var(--radius-sm); background: none; }
+.sp-inh::after { content: ''; position: absolute; inset: var(--space-4); border-radius: var(--radius-round); border: var(--stroke-emphasis) solid var(--muted-foreground); }
+.sp-inh.machine::after { border-color: var(--stem-ui); background: linear-gradient(90deg, var(--stem-ui) 50%, transparent 50%); }
+.sp-inh.project::after { border-color: var(--primary); background: var(--primary); }
+.sp-inh:hover { background: var(--accent); }
+.sp-chain { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-14); margin-top: var(--space-4); padding: var(--space-6) var(--space-10); border: var(--space-1) solid var(--border); border-radius: var(--radius-control); background: var(--code-background); font-size: var(--text-2xs); color: var(--muted-foreground); }
+.sp-chain[hidden] { display: none; }
+.sp-chain span { display: inline-flex; align-items: center; gap: var(--space-6); }
+.sp-chain i { width: var(--space-10); font-style: normal; color: var(--primary); }
+.sp-chain b { --leading: var(--leading-normal-mono); font: 500 var(--text-2xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); color: var(--foreground); }
+.sp-chain .eff { color: var(--foreground); }
+.sp-chain .unset b { color: var(--muted-foreground); font-weight: 400; }
+
+/* the search jump: the destination row pulses twice (T3's settings-search-target-pulse) */
+@keyframes sp-pulse { 0%, 100% { box-shadow: inset 0 0 0 0 transparent; } 50% { box-shadow: inset 0 0 0 var(--space-2) var(--primary-text); } }
+.sp-row.sp-pulse { animation: sp-pulse var(--motion-code-flash) ease-in-out 2; }
+.sp-row.sp-pulse:focus { outline: none; }
+
+/* page-specific blocks */
+.sp-extra { margin-top: var(--space-12); }
+.sp-extra.kh .kh-q { margin-bottom: var(--space-10); }
+.sp-extra.kh .kh-body { max-height: none; overflow: visible; grid-template-columns: 1fr; }
+.sp-report { margin: var(--space-12) 0 0; max-height: var(--settings-report-max-h); overflow: auto; padding: var(--space-10) var(--space-12); border: var(--space-1) solid var(--border); border-radius: var(--radius-control); background: var(--code-background); font: var(--text-2xs)/var(--settings-detail-leading) var(--font-mono); color: var(--foreground); white-space: pre-wrap; }
+.sp-report.bad { border-color: var(--error-border); }
+/* Settings tables (About credits, Engine & tools engines): one 32px row per item, 20px text, xs buttons on the row centre */
+.ab-credits { display: flex; flex-direction: column; gap: var(--space-16); }
+.ab-group h4 { margin: 0 0 var(--space-4); color: var(--muted-foreground); font-size: var(--text-2xs); font-weight: 500; line-height: var(--settings-leading); }
+.sp-table { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; font-size: var(--text-2xs); line-height: var(--settings-leading); }
+/* row lines as inset shadows: borders would leave an odd content height and put the 24px buttons on half pixels */
+.sp-table :is(th, td) { height: var(--settings-table-row-h); padding: 0 var(--space-12) 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; box-shadow: inset 0 var(--space-1) var(--border); text-align: left; vertical-align: middle; }
+.sp-table tr:last-child :is(th, td) { box-shadow: inset 0 var(--space-1) var(--border), inset 0 calc(-1 * var(--space-1)) var(--border); }
+.sp-table th { width: var(--settings-table-name-w); font-weight: 400; }
+.sp-table th .link { color: var(--foreground); font-size: inherit; line-height: inherit; }
+.ab-use { color: var(--muted-foreground); }
+.ab-lic { width: var(--about-licence-w); color: var(--muted-foreground); }
+.ab-act { width: var(--about-action-w); padding-right: 0; text-align: right; }
+.eng-path { color: var(--muted-foreground); font-family: var(--font-mono); direction: rtl; }
+.eng-ver { width: var(--engines-version-w); color: var(--muted-foreground); font-family: var(--font-mono); }
+.eng-st { width: var(--engines-status-w); padding-right: 0; text-align: right; }
+.eng-st .sp-val { justify-content: flex-end; }
+.eng-none { color: var(--muted-foreground); }
+.ab-more { margin: 0; display: flex; align-items: center; gap: var(--space-8); color: var(--muted-foreground); font-size: var(--text-2xs); line-height: var(--settings-leading); }
+.modal.lic { width: min(var(--dialog-w-lg), calc(100vw - var(--dialog-viewport-gap))); height: min(var(--licence-dialog-h), calc(100vh - var(--dialog-viewport-block-gap))); }
+#licence-dlg.modal-back { z-index: var(--z-modal-backdrop); }
+.lic-text { flex: 1; min-height: 0; margin: 0; overflow: auto; padding: var(--space-10) var(--space-12); border: var(--space-1) solid var(--border); border-radius: var(--radius-control); background: var(--code-background); color: var(--foreground); font: var(--text-2xs)/var(--settings-detail-leading) var(--font-mono); white-space: pre-wrap; }
+/* rendered markdown (THIRD_PARTY_NOTICES.md) */
+.lic-text.md { font-family: var(--font-sans); line-height: var(--settings-leading); white-space: normal; color: var(--muted-foreground); }
+.lic-text.md :is(h2, h3, h4, h5) { margin: var(--space-16) 0 var(--space-4); color: var(--foreground); font-size: var(--text-xs); font-weight: 600; line-height: var(--settings-leading); }
+.lic-text.md h2 { margin-top: 0; font-size: var(--text-sm); }
+.lic-text.md :is(p, ul) { margin: 0 0 var(--space-8); }
+.lic-text.md ul { padding-left: var(--space-18); }
+.lic-text.md code { font-family: var(--font-mono); color: var(--foreground); }
+.lic-text.md b { color: var(--foreground); font-weight: 500; }
+.lic-text.md table { width: 100%; margin: 0 0 var(--space-8); border-collapse: separate; border-spacing: 0; }
+.lic-text.md :is(th, td) { padding: var(--space-4) var(--space-8) var(--space-4) 0; border-top: var(--space-1) solid var(--border); text-align: left; vertical-align: top; }
+.lic-text.md th { color: var(--foreground); font-weight: 500; }
+.sp-t3 .t3-st { padding-left: 0; }
+.sp-t3 .t3-levels { margin: 0; gap: var(--space-4); }
+.sp-t3 .t3-levels li { padding-block: calc(var(--space-4) - var(--space-1)); }
+/* 16px description lines and 32px controls already share an even centre, including 3–5-line descriptions. */
+.sp-t3 .t3-st { align-self: stretch; }
+.sp-t3 .t3-levels { align-self: stretch; }
+/* First take (docs/LOOKS.md §1): profile select, plus the three Custom fields under it */
+.sp-wf-fields { display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-4); }
+.sp-wf-fields label { display: flex; align-items: center; gap: var(--space-8); color: var(--muted-foreground); font-size: var(--text-2xs); }
+.sp-ctl .sp-wf-fields select { width: var(--settings-workflow-field-w); }
+
+/* Pixel grid: even text stacks and 32px controls share an even row centre. Search's two borders leave 32px.
+   Keyboard hints use an 18px box / 11px mono label here, keeping both their top and their inner leading integral. */
+#settings-page :is(.sp-scope-hint, .sp-note, .sp-err, .setup-label, .t3-levels, .sp-val, .sp-chain) { line-height: var(--settings-detail-leading); }
+#settings-page .sp-title h3, #settings-page .sp-sec h2 { line-height: var(--settings-leading); }
+#settings-page :is(.sp-ctl, .sp-btns, .sp-pair, .sp-stack, .sp-wf-fields) { line-height: var(--settings-detail-leading); }
+#settings-page :is(.sp-chk, .sp-wf-fields label) { line-height: var(--settings-leading); }
+#settings-page .t3-st { line-height: var(--settings-detail-leading); }
+#settings-page kbd { --kbd-h: var(--settings-search-key-h); font-size: var(--text-2xs); }
+#settings-page .kh-r { align-items: start; line-height: var(--settings-leading); }
+#settings-page .kh-k { display: flex; align-items: center; min-height: var(--settings-leading); flex-wrap: wrap; }
+#settings-page .kh-k kbd { padding-block: 0; }
+#settings-page .kh-q { line-height: calc(var(--control-h) - 2 * var(--space-1)); }
+#settings-page .kh-g h4 { line-height: var(--settings-leading); }
+
+.sp-err { height: var(--space-16); line-height: var(--space-16); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; overflow-wrap: normal; }
+.sp-reset, .sp-inh { flex: none; }
+.gfx-menu .sp-chain { margin: 0; flex-direction: column; flex-wrap: nowrap; max-width: var(--settings-path-max-w); }
+.gfx-menu .sp-chain span { flex-wrap: wrap; }

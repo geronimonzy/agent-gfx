@@ -1,0 +1,11 @@
+[
+  { "role": "hit", "sound": "sample", "src": "library/kenney/impact/Audio/impactPunch_medium_002.ogg", "alt": { "sound": "impact", "variant": "punch", "params": { "intensity": 0.55 } }, "tags": ["punchy", "tight"], "note": "every hard cut, gain -4" },
+  { "role": "hit-heavy", "sound": "sample", "src": "library/kenney/impact/Audio/impactPunch_heavy_000.ogg", "alt": { "sound": "impact", "variant": "punch", "params": { "intensity": 0.8 } }, "tags": ["punchy"], "note": "the loudest beat (accent frame)" },
+  { "role": "whoosh", "sound": "whoosh", "variant": "zip", "params": { "intensity": 0.55, "dur": 0.25 }, "tags": ["tight"], "note": "whip slides, peak at the landing, gain -6" },
+  { "role": "transition", "sound": "sample", "src": "library/kenney/rpg/Audio/drawKnife2.ogg", "alt": { "sound": "whoosh", "variant": "swipe", "params": { "intensity": 0.5 } }, "tags": ["tight"], "note": "a sharp swipe on bigger changes, gain -8" },
+  { "role": "riser", "sound": "rise", "params": { "intensity": 0.6, "dur": 1.0 }, "tags": ["tension"], "note": "ends on the loudest beat" },
+  { "role": "ui", "sound": "sample", "src": "library/kenney/interface/Audio/switch_002.ogg", "alt": { "sound": "click" }, "tags": ["tight"], "note": "labels and strips landing" },
+  { "role": "tick", "sound": "tick", "tags": ["tight"], "note": "counters (countTicks, accelerating)" },
+  { "role": "result", "sound": "ding", "tags": ["accent"], "note": "count-up lands" },
+  { "role": "logo", "sound": "logo", "variant": "punch", "tags": ["punchy"], "note": "end card slam" }
+]

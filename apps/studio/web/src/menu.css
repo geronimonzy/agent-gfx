@@ -1,0 +1,14 @@
+/* menus (Panels, ⋯, tab right-click, the project menus of the welcome window): menu.js */
+.gfx-menu { position: fixed; z-index: var(--z-menu); min-width: var(--menu-w); max-width: calc(100vw - var(--space-8)); max-height: calc(100vh - var(--space-8)); overflow: auto; padding: var(--space-4); background: var(--popover); border-radius: var(--radius); box-shadow: 0 var(--space-10) var(--space-30) var(--shadow-ink); font: var(--text-xs)/var(--space-16) var(--font-sans); color: var(--foreground); }
+.gfx-menu-item { display: flex; align-items: center; gap: var(--space-8); width: 100%; height: var(--menu-item-h, var(--control-h)); padding-inline: var(--space-6) var(--space-10); border: 0; border-radius: var(--radius-control); background: none; color: inherit; text-align: left; font: inherit; font-weight: 500; line-height: var(--control-leading); justify-content: flex-start; }
+.gfx-menu-item:is(:hover, .is-hover):not(:disabled) { background: var(--accent); }
+.gfx-menu-item:disabled { color: var(--muted-foreground); cursor: default; }
+.gfx-menu-item span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gfx-menu-item kbd { margin-left: var(--space-12); }
+.gfx-check { width: var(--space-14); flex: none; font-style: normal; color: var(--primary); text-align: center; }
+.gfx-menu-sep { height: var(--space-1); margin: var(--space-4) var(--space-2); background: var(--border); }
+.gfx-menu-chips { display: flex; align-items: center; gap: calc(var(--space-2) + var(--space-1)); padding: calc(var(--space-2) + var(--space-1)) var(--space-6) calc(var(--space-2) + var(--space-1)) var(--space-28); }
+.gfx-menu-chips span { flex: 1; color: var(--muted-foreground); }
+.gfx-menu-chips button { min-width: var(--space-30); height: var(--control-h-xs); padding-inline: var(--space-6); border: var(--space-1) solid var(--border); border-radius: var(--radius-sm); background: var(--code-background); color: var(--foreground); font: var(--text-2xs)/var(--control-leading) var(--font-mono); }
+.gfx-menu-chips button:hover { border-color: var(--input); color: var(--foreground); }
+.gfx-menu-chips button.on { background: var(--selection); border-color: var(--primary); color: var(--primary-text); }

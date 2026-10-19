@@ -1,0 +1,44 @@
+[package]
+name = "gfx-studio"
+version = "0.2.0"
+license = "MIT"
+edition = "2021"
+
+[lib]
+name = "gfx_studio_lib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "gfx-studio"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["unstable"] }  # unstable: Window::add_child (the T3 view, docs/T3.md §4)
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+portable-pty = "0.9"
+ureq = { version = "2", default-features = false, features = ["tls", "json"] }
+sha2 = "0.10"
+base64 = "0.22"
+getrandom = "0.2"
+
+[target.'cfg(windows)'.dependencies]
+# the welcome window's folder drop: WebView2 hands the host the dropped File's real path (welcome.rs hook_drop); same
+# versions as wry / tauri use, so nothing new is compiled
+webview2-com = "0.39"
+windows-core = "0.62"
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 16
+strip = true
+panic = "abort"

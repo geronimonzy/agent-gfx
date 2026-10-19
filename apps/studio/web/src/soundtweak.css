@@ -1,0 +1,23 @@
+/* Shape section of the cue inspector (soundtweak.js, docs/SOUND-TWEAK.md): rows reuse the inspector's .field grid */
+.stw { margin-top: var(--space-16); padding-top: var(--space-12); border-top: var(--space-1) solid var(--border); }
+.stw-h { display: flex; align-items: baseline; gap: var(--space-8); min-width: 0; }
+.stw-sub { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: none; letter-spacing: 0; font: var(--text-3xs)/var(--space-16) var(--font-mono); }
+.stw-row input[type="range"] { width: 100%; min-width: 0; }
+.stw-row select { grid-column: 2 / 4; }
+.stw-actions { display: flex; flex-wrap: wrap; gap: var(--space-6); margin-bottom: var(--space-12); }
+.stw-actions .spacer { flex: 1; }
+.stw-actions .tbtn { padding-inline: var(--space-8); }
+.stw-rep { margin-bottom: var(--space-12); border-bottom: var(--space-1) solid var(--border); padding-bottom: var(--space-6); }
+.stw-gh { margin: var(--space-8) 0 var(--space-4); color: var(--muted-foreground); font: 600 var(--text-3xs)/var(--space-16) var(--font-sans); text-transform: uppercase; letter-spacing: .04em; }
+.stw-cand { display: flex; align-items: center; gap: var(--space-6); min-height: var(--control-h-xs); padding-inline: var(--space-2); border-radius: var(--radius-sm); }
+.stw-cand:hover { background: var(--accent); }
+.stw-cand .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stw-cand .nm small { margin-left: var(--space-6); color: var(--muted-foreground); }
+.stw-aud { width: var(--control-h-xs); height: var(--control-h-xs); padding: 0; border: 0; border-radius: var(--radius-sm); background: none; color: var(--muted-foreground); display: grid; place-items: center; font-size: var(--text-3xs); }
+.stw-aud:hover { color: var(--foreground); background: var(--muted); }
+.stw-n { color: var(--primary); font: var(--text-3xs)/var(--space-16) var(--font-mono); }
+.stw-note { color: var(--muted-foreground); font-size: var(--text-2xs); padding: var(--space-2) 0; }
+
+.stw-rep { height: var(--ask-brief-max-h); overflow: auto; scrollbar-gutter: stable; overflow-anchor: none; }
+.stw-cand.cur { background: var(--selection); box-shadow: inset var(--space-2) 0 var(--primary); }
+.stw-n { font-variant-numeric: tabular-nums; }

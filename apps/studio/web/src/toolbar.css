@@ -1,0 +1,36 @@
+/* §7: equal side tracks keep the mode switch at the viewport centre, independent of content widths.
+   #app and guide frames are named containers so the same responsive rules apply to real specimens. */
+#app, .sg-toolbar-frame { container: studio-chrome / inline-size; }
+.studio-topbar { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: var(--region-gap); height: var(--toolbar-h); padding: 0 var(--space-8); background: var(--app-chrome-background); border-bottom: var(--space-1) solid var(--border); flex: none; white-space: nowrap; }
+.toolbar-left, .toolbar-right, .scene-crumb, .toolbar-status { display: flex; align-items: center; gap: var(--region-gap); min-width: 0; }
+.toolbar-right { justify-self: end; }
+.studio-topbar > .seg { justify-self: center; }
+.toolbar-left > :not(.scene-crumb, .crumb-project), .toolbar-right > *, .toolbar-status > * { flex: none; }
+/* Names shrink only when the side track runs out of room (flex), capped by --toolbar-project-max-w. */
+.crumb-project { flex: 0 1 auto; }
+.scene-crumb { flex: 0 1 auto; overflow: hidden; }
+.studio-topbar button { white-space: nowrap; }
+.studio-topbar :is(.tbtn, .primary, .seg button) { padding-inline: var(--control-pad); }
+.studio-topbar .seg button { flex: none; }
+.studio-topbar :is(.crumb-project, .crumb-scene) { min-width: 0; max-width: var(--toolbar-project-max-w); overflow: hidden; text-overflow: ellipsis; background: none; border-color: transparent; }
+.crumb-scene { flex: 0 1 auto; }
+.crumb-slash { color: var(--muted-foreground); line-height: var(--control-h); } /* the buttons' line box: same baseline as their labels, whole-pixel top in the 39px bar */
+.studio-topbar .app-menu-btn { gap: var(--space-6); }
+.studio-topbar .logo { flex: none; }
+.studio-topbar :is(.chip, .badge) { --status-h: var(--control-h); font-size: var(--region-text); padding-inline: var(--toolbar-status-pad); }
+.studio-topbar :is(.chip, .rq-chip, .claude-btn) { gap: var(--toolbar-status-gap); }
+.disk-mark { font-style: normal; }
+.studio-topbar :is(.t3-badge, .rq-chip b) { --status-h: var(--toolbar-count-h); height: var(--toolbar-count-h); min-height: var(--toolbar-count-h); line-height: var(--control-leading); }
+.studio-topbar .t3-badge::before { content: '●'; font-size: var(--text-3xs); }
+.studio-topbar .rq-chip b { display: inline-flex; align-items: center; }
+.studio-topbar .dirty { background: var(--primary-foreground); }
+.studio-topbar .history-icon { display: flex; }
+/* Collapse status labels first, then hide history labels; names shrink by flex in between. Keep 12px / 23px parity. */
+@container studio-chrome (max-width: 1600px) {
+  .toolbar-status :is(.chip, .badge) { width: var(--control-h); padding-inline: 0; }
+  .toolbar-status :is(.chip, .badge) > span { display: none; }
+}
+@container studio-chrome (max-width: 1360px) {
+  .history-label { display: none; }
+  .studio-topbar .history-btn { width: var(--control-h); padding-inline: 0; }
+}

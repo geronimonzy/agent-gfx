@@ -1,0 +1,75 @@
+/* Specimen layout only. Component appearance comes from the app's own styles. */
+html:has(body.sg), body.sg { height: auto; overflow: auto; }
+.sg { margin: 0; }
+.sg-header { padding: var(--space-24); border-bottom: var(--space-1) solid var(--border); }
+.sg h1 { margin: 0; font-size: var(--text-xl); font-weight: 600; text-wrap: balance; }
+.sg-header p, .sg-section > p { margin: var(--space-8) 0 var(--space-16); color: var(--muted-foreground); }
+.sg-tools, .sg-tools label { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-2); }
+.sg-tools { gap: var(--gap-4); }
+.sg-nav { display: flex; flex-wrap: wrap; gap: var(--gap-2) var(--gap-4); padding: var(--space-16) var(--space-24); border-bottom: var(--space-1) solid var(--border); }
+.sg a { color: var(--primary-text); text-underline-offset: calc(var(--space-2) + var(--space-1)); }
+.sg-section { padding: var(--space-24); border-bottom: var(--space-1) solid var(--border); scroll-margin-block: var(--space-16); }
+.sg h2 { margin: 0 0 var(--space-8); font-size: var(--text-lg); font-weight: 600; text-wrap: balance; }
+.sg-section > h3, :is(.sg-density, .sg-theme) > h3 { margin: var(--space-16) 0 var(--space-8); font-size: var(--text-sm); font-weight: 500; }
+.sg p { text-wrap: pretty; }
+.sg-compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--guide-column-min-w)), 1fr)); gap: var(--space-16); align-items: start; }
+.sg-density, .sg-theme { min-width: 0; padding: var(--space-16); border: var(--space-1) solid var(--border); border-radius: var(--radius); background: var(--background); color: var(--foreground); }
+.sg-density > h3, .sg-theme > h3 { margin-top: 0; }
+.sg[data-compare="dense"] .sg-density[data-density="comfortable"],
+.sg[data-compare="comfortable"] .sg-density[data-density="dense"] { display: none; }
+.sg-flow { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-2); }
+.sg-stack { display: flex; flex-direction: column; gap: var(--gap-2); }
+.sg-table-wrap { min-width: 0; margin-block-end: var(--gap-4); overflow: visible; }
+.sg-table { table-layout: fixed; width: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--text-xs); } /* separate: collapsed 1px borders split into half pixels */
+.sg-table th { line-height: var(--control-leading); font-weight: 500; color: var(--muted-foreground); text-align: left; }
+.sg-table :is(th, td) { padding: var(--space-8); border-bottom: var(--space-1) solid var(--border); vertical-align: middle; }
+.sg-table th:first-child { padding-left: 0; overflow-wrap: anywhere; }
+.sg-table td { min-width: 0; }
+.sg-table .sg-sample { display: flex; align-items: center; }
+.sg-table .sg-sample > * { min-width: 0; max-width: 100%; }
+.sg-table :is(input:not([type=checkbox], [type=radio]), select) { width: min(100%, var(--guide-field-w)); }
+.sg-table textarea { width: min(100%, var(--guide-textarea-w)); }
+.sg-sample { position: relative; display: inline-flex; align-items: center; vertical-align: middle; min-width: 0; max-width: 100%; }
+.sg-long { width: var(--guide-long-label-w); }
+.sg-swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--guide-swatch-min-w)), 1fr)); gap: var(--space-8); }
+.sg-swatch { min-width: 0; margin: 0; border: var(--space-1) solid var(--border); border-radius: var(--radius-control); overflow: hidden; }
+.sg-swatch i { display: block; height: var(--guide-swatch-h); border-bottom: var(--space-1) solid var(--border); }
+.sg-swatch figcaption { padding: var(--space-8); font: var(--text-2xs)/round(nearest, calc(var(--textarea-leading) * 1em), var(--space-1)) var(--font-mono); overflow-wrap: anywhere; }
+.sg-swatch small { display: block; color: var(--muted-foreground); font: inherit; }
+.sg-token { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-16); padding: var(--space-8) 0; }
+.sg code { font-family: var(--font-mono); font-size: var(--text-2xs); }
+.sg-measure { display: inline-block; height: var(--space-16); background: var(--selection); border: var(--space-1) solid var(--primary-border); }
+.sg-shape { width: var(--guide-shape-w); height: var(--guide-shape-h); border: var(--space-1) solid var(--border); background: var(--card); }
+.sg-shadow { padding: var(--space-20); background: var(--popover); border-radius: var(--radius); box-shadow: var(--shadow-overlay); }
+/* Unpin floating examples so menus, scrims, popovers and the toast can be inspected together. */
+.sg .gfx-menu, .sg #note-pop, .sg #toast { position: relative; inset: auto; transform: none; z-index: var(--z-base); }
+.sg .gfx-menu { width: 100%; }
+.sg .modal-back { position: relative; inset: auto; padding: var(--space-20); z-index: var(--z-base); border-radius: var(--radius); }
+.sg .modal { max-width: 100%; max-height: none; }
+.sg #note-pop { max-width: 100%; }
+.sg .tooltip { display: inline-block; }
+.sg .lb-card { max-width: var(--guide-library-card-w); }
+.sg .wl-act { max-width: var(--guide-welcome-action-w); }
+.sg-dense-row { display: flex; align-items: center; gap: var(--gap-1); padding: var(--space-6); border-bottom: var(--space-1) solid var(--border); }
+.sg :is(.spin, .claude-chip i, .rq-dot) { animation: none; }
+.sg .rq-bar i { width: 50%; }
+
+/* Measurement UI and overlay do not participate in specimen layout. */
+.sg-readout { margin-top: var(--gap-4); padding: var(--gap-3); border: var(--space-1) solid var(--border); border-radius: var(--radius); }
+.sg-readout output, .sg-readout li { font: var(--text-xs)/round(nearest, calc(var(--leading-loose) * 1em), var(--space-1)) var(--font-mono); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.sg-readout ol { margin-bottom: 0; padding-left: var(--space-24); }
+.sg-readout p { margin-block: var(--gap-2); color: var(--muted-foreground); }
+.sg-overlay { position: absolute; inset: 0; pointer-events: none; z-index: var(--z-tooltip); display: none; }
+.sg.centres .sg-overlay { display: block; }
+.sg-centre { position: absolute; height: 0; border-top: var(--space-1) dashed var(--info-foreground); }
+.sg-centre.optical { border-top-style: solid; border-color: var(--warning-foreground); }
+.sg-probe { position: absolute; left: calc(-1 * var(--guide-probe-offset)); top: 0; visibility: hidden; pointer-events: none; white-space: pre; }
+.sg-baseline { display: inline-block; width: 0; height: 0; padding: 0; border: 0; vertical-align: baseline; }
+
+/* Fixed-width real chrome, with local scrolling so the 1280/1680 specimens retain their actual layout. */
+.sg-toolbar-scroll { max-width: 100%; overflow: auto; margin-block: var(--space-16); }
+.sg-toolbar-frame.narrow { width: var(--guide-toolbar-narrow-w); }
+.sg-toolbar-frame.wide { width: var(--guide-toolbar-wide-w); }
+.sg-toolbar-frame > h3 { margin: var(--space-16) 0 var(--space-8); line-height: var(--space-20); font-size: var(--text-sm); }
+.sg-toolbar-menus { display: flex; padding: var(--space-4) var(--space-8); }
+.sg .sg-toolbar-menus .gfx-menu { width: var(--menu-w); }

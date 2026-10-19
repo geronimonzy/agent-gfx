@@ -1,0 +1,9 @@
+{
+  "kind": "anime",
+  "width": 800,
+  "height": 400,
+  "fps": 30,
+  "duration": 3,
+  "style": "dark-grid",
+  "title": "retime fixture (tests/retime.test.mjs)"
+}

@@ -1,0 +1,169 @@
+/* Shared component contract and aliases for the existing studio selectors. */
+/* Re-evaluate em at each element's font size; inheriting a computed px line-height would keep the parent's size.
+   Centred text stacks may use a 2px step (still within 1px of their original leading).
+   Explicit control / field leading below wins. --leading remains an inherited ratio for feature prose. */
+:where(*, *::before, *::after) { line-height: round(nearest, calc(var(--leading) * 1em), var(--leading-step)); }
+/* Nested control labels keep the calibrated control line box. Settings already owns 20/16px stacks;
+   preserve those inherited lengths rather than re-applying the prose ratio to anonymous wrappers. */
+:where(button, kbd, .chip, .badge, .pill, [role=tab], .chk, .toggle, .gfx-tab) :where(*),
+:where(#settings-page *, .cm-editor *, .xterm *) { line-height: inherit; }
+body, [data-density] { font-family: var(--font-sans); font-size: var(--region-text); }
+:where(button, input, select, textarea) { font: inherit; color: inherit; }
+/* Controls own symmetric block padding. The calibrated Inter / Field metric overrides
+   and density parity rule centre the rendered cap-to-baseline block (DESIGN.md §6). */
+:where(button, input:not([type=checkbox], [type=radio], [type=range], [type=color], [type=file], [type=hidden]), select,
+  .input, .chip, .badge, .pill, kbd, .pb-chip, .lb-badge, .t3-badge, .cs-key, .ns-rtag, .kh-ctx,
+  .lb-tags span, .ct-tab, .dk-term, .ns-seg label span, .gfx-menu-item, .menu-item, #toast, .tooltip,
+  .tabs button b, .rd-tabs button b, .rq-chip b, .co-file, .co-ref, .cs-err, .ck, .actor, #live-badge, #paths-tip) {
+  --control-pad-block: var(--space-2);
+  padding-block: var(--control-pad-block);
+  line-height: var(--control-leading);
+}
+/* Chromium's native menulist appearance ignores the author line-height. Reset
+   its internal theme geometry and reserve a token-sized arrow. The element and
+   dropdown remain native; its closed label now uses our explicit content box. */
+select {
+  --field-h: var(--control-h);
+  --field-pad-end: var(--space-24);
+  --field-leading: calc(var(--field-h) - var(--space-2) - 2 * var(--control-pad-block));
+  height: var(--field-h);
+  display: inline-flex;
+  align-items: center;
+  appearance: none;
+  background-image: var(--select-indicator);
+  background-repeat: no-repeat;
+  background-position: right var(--space-8) center;
+  background-size: var(--space-12) var(--space-12);
+}
+/* Plex Label and Field share glyphs/widths with the editor face, using separate
+   measured metric overrides for flex labels and native input line boxes.
+   Keep editors / multiline prose on the unmodified mono face. */
+:where(kbd, .pb-chip, .pb-onion, .co-file, .co-ref, .cs-key, .ns-rtag,
+  .tabs button b, .rd-tabs button b, .rq-chip b, .gfx-menu-chips button,
+  .crumbs .crumb, button.path, .df-file, .group-head .show-hidden,
+  input[type=number], .t3-field input, .lat input,
+  #ns-name, .sp-ctl .mono, input.mono, button.mono,
+  .tc, .np-head, .row .t, .lh-db, #live-badge, #paths-tip) {
+  --font-mono: var(--font-mono-label);
+  line-height: var(--control-leading);
+}
+/* Monospace values in text fields use the field face (centres in a full-height line box). */
+:is(input[type=number], .t3-field input, .lat input, #ns-name, input.mono) { --font-mono: var(--font-mono-field); }
+/* All number inputs show their value in mono (user decision 2026-10-17): the field rule below reads --font-field,
+   so swapping the token keeps one font-family declaration and the field's centring. */
+input[type=number] { --font-field: var(--font-mono-field); }
+select:is(.sm, .input-sm) { --field-h: var(--control-h-sm); }
+select:is(.xs, .input-xs) { --field-h: var(--control-h-xs); }
+/* Single-line actions share a cap centre, independent of their tag name.
+   Multiline navigation/cards retain their feature layout and natural line height. */
+:where(button) {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--gap-1); line-height: var(--control-leading); font-weight: 500;
+  padding-block: var(--control-pad-block);
+}
+:where(.btn, .tbtn, button.primary, button.icon, .mini, .proj-btn) {
+  box-sizing: border-box; height: var(--control-h); padding: var(--control-pad-block) var(--control-pad);
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--gap-1); line-height: var(--control-leading);
+  border: var(--space-1) solid var(--border); border-radius: var(--radius-control);
+  background: var(--card); color: var(--foreground); font-size: var(--region-text); font-weight: 500;
+  cursor: pointer; transition: background-color var(--motion-fast), border-color var(--motion-fast), transform var(--motion-fast);
+}
+:where(button.icon) { background: none; border-color: transparent; }
+:where(.btn, .tbtn, button.primary, button.icon, .mini, .proj-btn):is(:hover, .is-hover):not(:disabled) { background: var(--accent); }
+:where(.btn, .tbtn, button.primary, button.icon, .mini, .proj-btn):is(:active, .is-active):not(:disabled) { transform: scale(var(--active-scale)); }
+:where(button, input, select, textarea, a[href], [tabindex]):focus:not(:focus-visible) { outline: none; }
+:is(button, input, select, textarea, a[href], [tabindex]):is(:focus-visible, .is-focus) {
+  outline: var(--focus-width) solid var(--ring); outline-offset: calc(-1 * var(--focus-width));
+}
+:is(button, input, select, textarea):disabled { opacity: var(--disabled-opacity); cursor: default; }
+:where(.btn.primary, button.primary, .tbtn.primary) { padding-inline: var(--space-12); background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
+:where(.btn.primary, button.primary, .tbtn.primary):is(:hover, .is-hover):not(:disabled) { background: var(--primary-hover); }
+:where(.btn.ghost) { background: transparent; border-color: transparent; }
+:where(.btn.outline) { background: transparent; border-color: var(--input); }
+:where(.btn.destructive) { background: var(--error-surface); border-color: var(--error-border); color: var(--error-foreground); }
+:where(.btn, .tbtn).on { background: var(--selection); border-color: var(--primary); color: var(--primary-text); }
+:where(.btn.sm, .tbtn.sm, button.primary.sm) { height: var(--control-h-sm); padding-inline: var(--control-pad-sm); font-size: var(--text-xs); }
+:where(.btn.xs, .tbtn.xs, button.primary.xs, .mini) { height: var(--control-h-xs); padding-inline: var(--control-pad-xs); font-size: var(--text-2xs); }
+:where(.btn.icon, button.icon) { width: var(--control-h); padding-inline: 0; flex: none; }
+:where(.btn.icon, button.icon):is(.sm) { width: var(--control-h-sm); height: var(--control-h-sm); padding-inline: 0; }
+:where(.btn.icon, button.icon):is(.xs) { width: var(--control-h-xs); height: var(--control-h-xs); padding-inline: 0; }
+:where(button) > svg { width: var(--space-16); height: var(--space-16); flex: none; }
+:where(button):is(.sm) > svg { width: var(--space-14); height: var(--space-14); }
+:where(button):is(.xs, .mini) > svg { width: var(--space-12); height: var(--space-12); }
+.btn-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: inherit; }
+:is(input[type=text], input[type=search], input[type=number], input[type=password], input[type=url], select, textarea, .input) {
+  box-sizing: border-box; height: var(--control-h); padding: var(--control-pad-block) var(--field-pad-end, var(--gap-2)) var(--control-pad-block) var(--gap-2); border: var(--space-1) solid var(--input);
+  border-radius: var(--radius-control); background-color: var(--card); color: var(--foreground);
+  font-weight: 500; line-height: var(--field-leading, var(--control-leading));
+}
+:is(input, select, .input):is(.sm, .input-sm) { height: var(--control-h-sm); font-size: var(--text-xs); }
+:is(input, select, .input):is(.xs, .input-xs) { height: var(--control-h-xs); font-size: var(--text-2xs); }
+:is(input, select, textarea):is(:hover, .is-hover):not(:disabled) { border-color: var(--input-hover); }
+/* Native search decorations can reserve space even when no icon is drawn. */
+input[type=search] { appearance: none; padding-inline: var(--gap-2); }
+/* Text fields: Chromium centres the line box inside the field, so give the line box the whole inner height (no block
+   padding) and let Inter's metrics centre the caps; symmetric by construction, so number spin buttons stay centred.
+   Size follows the region (14px comfortable, 12px dense); heights obey the parity rule in density.css. */
+:is(input[type=text], input[type=search], input[type=number], input[type=password], input[type=url], .input):not(textarea) {
+  --input-h: var(--control-h); height: var(--input-h); font-size: var(--region-text); font-family: var(--font-field);
+  padding-block: 0; line-height: calc(var(--input-h) - 2 * var(--space-1));
+}
+:is(input[type=text], input[type=search], input[type=number], input[type=password], input[type=url], .input):is(.sm, .input-sm) { --input-h: var(--control-h-sm); font-size: var(--text-xs); }
+:is(input[type=text], input[type=search], input[type=number], input[type=password], input[type=url], .input):is(.xs, .input-xs) { --input-h: var(--control-h-xs); font-size: var(--text-2xs); }
+/* Mono digits are ~4% smaller than Inter caps: one step up matches the optical size and keeps the parity rule. */
+input[type=number]:not(textarea) { font-size: calc(var(--region-text) + var(--mono-field-step)); }
+input[type=number]:is(.sm, .input-sm) { font-size: calc(var(--text-xs) + var(--mono-field-step)); }
+input[type=number]:is(.xs, .input-xs) { font-size: calc(var(--text-2xs) + var(--mono-field-step)); }
+input[type=search]::-webkit-search-decoration { appearance: none; }
+:is(textarea, textarea.input) { height: auto; min-height: var(--control-h); padding: var(--gap-2); line-height: round(nearest, calc(var(--textarea-leading) * 1em), var(--space-1)); }
+::placeholder { color: var(--placeholder); opacity: 1; }
+input:is([type=checkbox], [type=radio]) { margin: 0; width: var(--space-14); height: var(--space-14); accent-color: var(--primary); }
+/* The anonymous label line box must also use cap-centred leading. This covers
+   Inputs, Settings, New scene / This take, Render and the inspector switch. */
+:is(.chk, .toggle, .field label.chk) { display: inline-flex; align-items: center; line-height: var(--control-leading); }
+:where(.toggle > span) { line-height: inherit; }
+:is(.seg, .tabs, .lb-ftabs) { background: var(--muted); }
+/* Tabs reserve no layout space for their indicator; all states share one centre. */
+:is(.tabs button, .lb-ftabs button, .rd-tabs button, .dk-term, .ct-tab) {
+  border-radius: var(--radius-sm); flex-shrink: 0; white-space: nowrap;
+}
+:is(.seg button, .rd-seg button, .ns-seg label span) { white-space: nowrap; }
+.seg { box-sizing: border-box; height: var(--control-h); }
+.seg.sm { height: var(--control-h-sm); }
+.seg.xs { height: var(--control-h-xs); }
+.seg.sm button { font-size: var(--text-xs); }
+.seg.xs button { font-size: var(--text-2xs); }
+:is(.seg button, .tabs button) { height: var(--control-h); color: var(--muted-foreground); }
+.seg button { height: 100%; }
+:is(.seg button, .tabs button):is(:hover, .is-hover):not(:disabled) { background: var(--accent); color: var(--accent-foreground); }
+:is(.seg button, .tabs button).on { background: var(--card); color: var(--foreground); border-color: var(--border); }
+:is(.card, .sp-card, .lb-card, .panel) { background: var(--card); color: var(--card-foreground); border-color: var(--border); }
+:is(.card, .sp-card, .lb-card) { border-radius: var(--radius); }
+:where(.modal, .gfx-menu, #note-pop, #toast, .popover) {
+  background: var(--popover); color: var(--popover-foreground); border: var(--space-1) solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow-overlay);
+}
+:where(.modal-back, #att-preview) { background: var(--scrim); backdrop-filter: blur(var(--glass-blur)); }
+:is(.gfx-menu-item, .menu-item) { border-radius: var(--radius-control); height: var(--menu-item-h, var(--control-h)); }
+:is(.gfx-menu-item, .menu-item):is(:hover, .is-hover):not(:disabled) { background: var(--accent); }
+:is(.badge, .pill, .chip) { border-radius: var(--pill-radius); font-size: var(--text-2xs); }
+kbd { padding-inline: var(--space-4); margin-left: var(--space-4); --leading: var(--leading-normal-mono); font: var(--text-3xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); background: var(--muted); color: var(--muted-foreground); border: var(--space-1) solid var(--border); border-radius: var(--radius-sm); }
+:is(.badge, .pill, .chip, kbd, .lb-badge, .t3-badge, .lb-tags span, .ns-rtag, .kh-ctx) {
+  box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--gap-1); height: var(--status-h); min-height: var(--status-h);
+  padding-block: var(--control-pad-block);
+  line-height: var(--control-leading); font-weight: 500;
+}
+/* kbd: odd box + line box filling it (see --kbd-h); flex centring with padding drifted with the element's position. */
+kbd { --status-h: var(--kbd-h); --control-pad-block: 0px; --control-leading: var(--kbd-leading); }
+/* A nested label uses the control's line box, rather than its own natural leading. */
+:is(.chip, .badge, .pill) > span { display: inline-flex; align-items: center; line-height: inherit; }
+.tooltip { background: var(--popover); color: var(--popover-foreground); --control-pad-block: var(--gap-1); padding-inline: var(--gap-2); border-radius: var(--radius-sm); box-shadow: var(--shadow-overlay); }
+* { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); }
+@media (prefers-reduced-motion: reduce) { .btn, .tbtn, button.primary, button.icon, .mini { transition: none; } }
+
+.modal-back { position: fixed; inset: 0; z-index: var(--z-modal-backdrop); display: grid; place-items: center; }
+.modal { width: min(var(--dialog-w-md), calc(100vw - var(--dialog-viewport-gap))); max-height: calc(100vh - var(--dialog-viewport-block-gap)); display: flex; flex-direction: column; gap: var(--space-10); padding: var(--space-14) var(--space-16); }
+.tooltip { z-index: var(--z-tooltip); }
+
+:where(.btn, .tbtn, button.primary) > kbd { margin: 0; flex: none; }

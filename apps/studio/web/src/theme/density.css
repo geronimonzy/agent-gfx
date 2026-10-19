@@ -1,0 +1,45 @@
+/* Parity rule (docs/DESIGN.md §6): (height − 2·border − rendered cap height) must be even so a single-line label
+   sits exactly centred (Chrome snaps the baseline to whole pixels). Inter caps render 8px at 11px, 9px at 12px,
+   10px at 14px: 12px controls use odd heights (21/23/27), 11px and 14px controls even ones (18/20/24/32). */
+/* Container parity as well as cap parity: --toolbar-h = 40 (39 inner after bottom border) with 23px controls;
+   --transport-h = 43 (42 inner after top border) with 32px actions / 16px range. Nested status boxes and segments
+   match their parents' parity. Settings uses 41px header (40 inner), 20/16px text leading and 34px search (32 inner).
+   Keep the differences even when changing these roles; see scale.css and scripts/check-pixel-grid.mjs. */
+/* Re-declare the complete density contract at region boundaries; nested regions do not inherit the wrong size. */
+:root, [data-density="comfortable"] {
+  --control-h: var(--space-32);
+  --control-h-sm: calc(var(--space-28) - var(--space-1)); /* 27: 12px label, see parity rule */
+  --control-h-xs: var(--space-24);
+  --menu-item-h: var(--control-h-sm); /* menu labels are 12px: odd height */
+  --region-text: var(--text-sm);
+  --region-gap: var(--gap-2);
+  --settings-mono-field-step: 0px; /* 11px mono in the 32px field: centred (ink-int 0.12px) */
+}
+[data-density="dense"] {
+  --control-h: calc(var(--space-24) - var(--space-1)); /* 23 */
+  --control-h-sm: calc(var(--space-22) - var(--space-1)); /* 21 */
+  --control-h-xs: var(--space-20);
+  --menu-item-h: var(--control-h);
+  --region-text: var(--text-xs);
+  --region-gap: var(--gap-1);
+  --settings-mono-field-step: var(--space-1); /* 23px field: 11px mono sat 0.38px low, 12px centres it */
+}
+/* Toolbars keep a complete dense contract even in comfortable windows and pop-outs. */
+.studio-topbar, #vtools {
+  --control-h: calc(var(--space-24) - var(--space-1)); /* 23 */
+  --control-h-sm: calc(var(--space-22) - var(--space-1)); /* 21 */
+  --control-h-xs: var(--space-20);
+  --menu-item-h: var(--control-h);
+  --region-text: var(--text-xs);
+  --region-gap: var(--gap-1);
+  --control-pad: var(--space-6);
+}
+.studio-topbar {
+  --toolbar-status-pad: var(--space-6);
+  --toolbar-status-gap: var(--space-4);
+}
+/* Transport's inner 42px centres every even-height control (32px actions, 16px range) on whole pixels. */
+#transport {
+  --control-h: var(--space-32);
+  --region-text: var(--text-sm);
+}

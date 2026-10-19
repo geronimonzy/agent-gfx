@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "title": "Explainer with captions",
+  "description": "16:9 three-step explainer on paper: step cards, drawn links, a moving highlight and a caption track.",
+  "tags": ["16:9", "explainer", "captions"],
+  "preview": { "scene": "explainer", "t": 9.0 }
+}

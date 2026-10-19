@@ -1,0 +1,9 @@
+[
+  { "role": "whoosh", "sound": "whoosh", "variant": "air", "tags": ["soft"], "note": "moves and slides, gain -8 (synth: the Kenney packs have no soft airy whoosh)" },
+  { "role": "transition", "sound": "swoosh", "variant": "silk", "tags": ["soft"], "note": "scene changes / cross-fades" },
+  { "role": "ui", "sound": "sample", "src": "library/kenney/interface/Audio/drop_003.ogg", "alt": { "sound": "pop" }, "tags": ["quiet"], "note": "elements appearing; soft low pop, gain -10; cascades: rate 1, 1.12, 1.26 (or the synth pop with pentatonic pitch)" },
+  { "role": "tick", "sound": "sample", "src": "library/kenney/ui/Audio/click5.ogg", "alt": { "sound": "tick" }, "tags": ["quiet"], "note": "lines, counters, grid snaps; gain -12" },
+  { "role": "hit", "sound": "impact", "variant": "thud", "params": { "intensity": 0.4 }, "tags": ["soft"], "note": "the one key moment" },
+  { "role": "result", "sound": "sample", "src": "library/kenney/interface/Audio/glass_004.ogg", "alt": { "sound": "chime" }, "tags": ["accent"], "note": "once, on the payoff; bright glass ding, gain -8" },
+  { "role": "logo", "sound": "logo", "variant": "thud", "tags": ["soft"], "note": "end card" }
+]

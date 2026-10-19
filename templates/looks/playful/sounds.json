@@ -1,0 +1,10 @@
+[
+  { "role": "ui", "sound": "sample", "src": "library/kenney/interface/Audio/drop_003.ogg", "alt": { "sound": "pop" }, "tags": ["bubbly"], "note": "things popping in; cascades up the pentatonic (rate 1, 1.12, 1.26 or pitch on the alt)" },
+  { "role": "pluck", "sound": "sample", "src": "library/kenney/interface/Audio/pluck_001.ogg", "alt": { "sound": "pop", "params": { "pitch": 7 } }, "tags": ["bubbly", "light"], "note": "letters landing, small UI, gain -6" },
+  { "role": "boing", "sound": "sample", "src": "library/kenney/digital/Audio/phaseJump3.ogg", "alt": { "sound": "whoosh", "variant": "zip", "params": { "intensity": 0.3, "pitch": 5 } }, "tags": ["boing", "rising"], "note": "jumps and bounces (rising pitch glide; closest Kenney fit to a boing, no real spring sample)" },
+  { "role": "hit", "sound": "sample", "src": "library/kenney/interface/Audio/bong_001.ogg", "alt": { "sound": "impact", "variant": "thud", "params": { "intensity": 0.3 } }, "tags": ["soft", "round"], "note": "a big shape landing (squash frame)" },
+  { "role": "whoosh", "sound": "whoosh", "variant": "air", "params": { "intensity": 0.3 }, "tags": ["soft"], "note": "groups moving or shrinking away, gain -10" },
+  { "role": "tick", "sound": "tick", "params": { "pitch": 5 }, "tags": ["light"], "note": "counters (countTicks)" },
+  { "role": "result", "sound": "sample", "src": "library/kenney/interface/Audio/glass_004.ogg", "alt": { "sound": "chime" }, "tags": ["bright"], "note": "the payoff (count lands)" },
+  { "role": "logo", "sound": "logo", "variant": "thud", "params": { "intensity": 0.5 }, "tags": ["round"], "note": "end card; layer a pop cascade on the letters" }
+]

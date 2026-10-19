@@ -1,0 +1,8 @@
+{
+  "sources": [
+    { "id": "synth", "kind": "synth", "license": "own", "enabled": true },
+    { "id": "kenney", "kind": "folder", "path": "library/kenney", "license": "CC0", "enabled": true },
+    { "id": "freesound-cc0", "kind": "folder", "path": "library/freesound-cc0", "license": "CC0", "enabled": false },
+    { "id": "sonniss-2024", "kind": "folder", "path": "D:/sfx/Sonniss GDC 2024", "license": "Sonniss GDC (royalty-free, no AI training)", "enabled": false }
+  ]
+}

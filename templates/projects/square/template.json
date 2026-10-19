@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "title": "Social square",
+  "description": "1:1 stat post: a progress ring counts up to the number, then the label, delta and your handle.",
+  "tags": ["1:1", "social", "stat"],
+  "preview": { "scene": "square", "t": 4.5 }
+}

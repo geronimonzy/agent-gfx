@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "title": "Product promo",
+  "description": "16:9 app promo: headline, UI mockup with tasks, feature chips, a stat and an end card with logo and CTA.",
+  "tags": ["16:9", "promo", "product"],
+  "preview": { "scene": "promo", "t": 4.4 }
+}

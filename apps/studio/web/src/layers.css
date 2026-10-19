@@ -1,0 +1,51 @@
+/* Layers tab (side panel) + LAYERS section heads in the timeline */
+.ly-head { display: flex; align-items: center; gap: var(--space-8); padding: var(--space-2) var(--space-12) var(--space-6); color: var(--muted-foreground); font-size: var(--text-3xs); letter-spacing: .09em; text-transform: uppercase; }
+.ly-hint { text-transform: none; letter-spacing: 0; font-size: var(--text-3xs); opacity: .7; }
+.lrow { display: flex; align-items: center; gap: var(--space-4); height: var(--space-24); padding: 0 var(--space-8) 0 var(--space-6); cursor: pointer; border-left: var(--space-2) solid transparent; }
+.lrow:hover { background: var(--accent); }
+.lrow.sel { background: var(--selection); border-left-color: var(--primary); }
+.lrow.off .nm, .lrow.off .ico { opacity: .4; }
+.lrow .ind { flex: none; }
+.lrow .tw { flex: none; width: var(--space-14); height: var(--space-18); padding-inline: 0; border: 0; background: none; color: var(--muted-foreground); font-size: var(--text-3xs); line-height: var(--control-leading); }
+.lrow .tw:hover { color: var(--foreground); }
+.lrow .tw.none { cursor: default; }
+.lrow .ico { flex: none; width: var(--space-10); height: var(--space-10); border-radius: var(--radius-xs); border: var(--stroke-emphasis) solid var(--muted-foreground); margin: 0 calc(var(--space-2) + var(--space-1)); }
+.lrow .ico.box { border-style: dashed; border-radius: var(--radius-control); border-color: var(--info-foreground); }
+.lrow .ico.gp { border-color: var(--warning-foreground); box-shadow: var(--space-2) var(--space-2) 0 calc(-1 * var(--icon-baseline-step)) var(--warning-border); }
+.lrow.sel .ico { border-color: var(--primary); }
+.lrow .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; --leading: var(--leading-normal-mono); font: var(--text-2xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); }
+.lrow .nm small { margin-left: var(--space-8); color: var(--muted-foreground); font-size: var(--text-3xs); }
+.lrow.grp .nm { color: var(--warning-foreground); }
+.lrow .ly-dot { flex: none; margin: 0 var(--space-2); }
+.lrow .ib { flex: none; width: var(--space-22); height: var(--space-20); padding-inline: 0; border: 0; border-radius: var(--radius-sm); background: none; color: var(--foreground); display: grid; place-items: center; }
+.lrow .ib svg { width: var(--space-14); height: var(--space-14); }
+.lrow .ib:hover { background: var(--accent); color: var(--foreground); }
+.lrow .ib.eye.inh, .lrow .ib.lock.inh { opacity: .5; }
+.lrow .ib.eye.on { color: var(--stem-motion); }
+.lrow .ib.eye.solo { background: var(--info-surface); color: var(--stem-ui); }
+.lrow .ib.lock.on { color: var(--stem-accents); opacity: 1; }
+.lrow .ib.lock:not(.on) { opacity: .25; }
+.lrow:hover .ib.lock:not(.on) { opacity: .8; }
+
+.layer-head { display: flex; align-items: center; gap: var(--space-4); padding: 0 var(--space-8) 0 var(--space-10); --leading: var(--leading-normal-mono); font: var(--text-3xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); color: var(--foreground); border-bottom: var(--space-1) solid var(--border); cursor: pointer; overflow: hidden; white-space: nowrap; }
+.layer-head:hover { background: var(--accent); }
+.layer-head.sel { background: var(--selection); color: var(--foreground); box-shadow: inset var(--space-2) 0 0 var(--primary); }
+.layer-head .nm { overflow: hidden; text-overflow: ellipsis; }
+.layer-head.grp .nm { color: var(--warning-foreground); }
+.layers-head { cursor: pointer; user-select: none; background: var(--card); }
+.layers-head:hover { color: var(--foreground); }
+.layers-head .chev { display: inline-block; width: var(--space-10); font-size: var(--text-3xs); }
+.layers-head .chip { margin-left: auto; padding-inline: calc(var(--space-4) + var(--space-1)) calc(var(--space-6) + var(--space-1)); font-size: var(--text-3xs); letter-spacing: 0; text-transform: none; }
+
+/* inspector additions */
+.field label.chk { display: flex; align-items: center; gap: var(--space-6); color: var(--foreground); grid-column: 2 / 4; }
+.field .zrow { grid-column: 2 / 4; display: flex; gap: var(--space-6); }
+.field .zrow .tbtn { flex: 1; padding-inline: var(--space-6); }
+.tabs button { white-space: nowrap; padding-inline: var(--space-6); flex: 1 1 auto; }
+.field .zrow .tbtn { white-space: nowrap; font-size: var(--text-2xs); }
+/* retiming (docs/RETIME.md): Linked toggle in the timeline LAYERS header, linked sounds line in the element inspector */
+.link-btn { flex: none; width: var(--space-18); height: calc(var(--space-16) + var(--space-1)); padding-inline: 0; border: 0; border-radius: var(--radius-sm); background: none; color: var(--muted-foreground); display: grid; place-items: center; }
+.link-btn:hover { background: var(--accent); color: var(--foreground); }
+.link-btn.on { color: var(--primary); }
+.ei-sounds { --leading: var(--leading-normal-mono); font: var(--text-3xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); color: var(--muted-foreground); padding-block: var(--space-2); }
+.ei-sounds:empty { display: none; }

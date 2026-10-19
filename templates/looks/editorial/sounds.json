@@ -1,0 +1,9 @@
+[
+  { "role": "transition", "sound": "sample", "src": "library/kenney/rpg/Audio/bookFlip1.ogg", "start": 0.06, "alt": { "sound": "swoosh", "variant": "silk", "params": { "intensity": 0.25 } }, "tags": ["paper", "page turn"], "note": "page turns (the clip-path wipe), gain -6; bookFlip2 / bookFlip3 as variants" },
+  { "role": "whoosh", "sound": "sample", "src": "library/kenney/rpg/Audio/bookFlip3.ogg", "alt": { "sound": "whoosh", "variant": "air", "params": { "intensity": 0.2, "dur": 0.4 } }, "tags": ["paper", "short"], "note": "small paper slides: a block or line masking in, gain -10" },
+  { "role": "tick", "sound": "sample", "src": "library/kenney/ui/Audio/mouserelease1.ogg", "alt": { "sound": "tick" }, "tags": ["dry", "quiet"], "note": "rules drawing on (one at the start), counter steps, gain -14" },
+  { "role": "ui", "sound": "sample", "src": "library/kenney/interface/Audio/tick_001.ogg", "alt": { "sound": "click" }, "tags": ["dry", "quiet"], "note": "columns / list items revealing, gain -12" },
+  { "role": "hit", "sound": "sample", "src": "library/kenney/rpg/Audio/bookPlace1.ogg", "start": 0.005, "alt": { "sound": "impact", "variant": "thud", "params": { "intensity": 0.3 } }, "tags": ["paper", "felt"], "note": "the one landing moment (a hero numeral settling): a book set down, gain -6" },
+  { "role": "result", "sound": "ding", "tags": ["soft", "accent"], "note": "once, on the payoff, gain -10; keep it small" },
+  { "role": "logo", "sound": "sample", "src": "library/kenney/rpg/Audio/bookClose.ogg", "start": 0.01, "alt": { "sound": "logo", "variant": "thud", "params": { "intensity": 0.35 } }, "tags": ["paper"], "note": "end card: the book closes, gain -5" }
+]

@@ -1,0 +1,20 @@
+/* Save as template dialog (savetemplate.js, docs/TEMPLATES.md §4) */
+.modal.savetpl { width: min(var(--dialog-w-sm), calc(100vw - var(--dialog-viewport-gap))); }
+.modal.savetpl .modal-head b { font-size: var(--text-sm); }
+.st-sub { font-size: var(--text-2xs); }
+.st-form { display: flex; flex-direction: column; gap: var(--space-12); }
+.st-scope { display: flex; flex-direction: column; gap: var(--space-6); margin: 0; padding: 0; border: 0; min-width: 0; }
+.st-scope legend, .st-field { color: var(--muted-foreground); font-size: var(--text-2xs); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+.st-scope legend { padding: 0; margin-bottom: var(--space-6); }
+.st-scope .chk { font-size: var(--text-sm); color: var(--foreground); gap: var(--space-8); }
+.st-field { display: flex; flex-direction: column; gap: var(--space-6); }
+.st-field input[type=text] { height: var(--control-h); width: 100%; font-size: var(--text-sm); letter-spacing: 0; text-transform: none; font-weight: 400; color: var(--foreground); }
+.st-note { margin: 0; font-size: var(--text-2xs); }
+.st-status { display: flex; align-items: center; gap: var(--space-8); font-size: var(--text-xs); color: var(--muted-foreground); }
+.st-err { display: flex; align-items: center; gap: var(--space-10); font-size: var(--text-xs); color: var(--error-foreground); }
+.st-err[hidden], .st-status[hidden] { display: none; }
+
+.st-messages { height: calc(3 * var(--space-24)); flex: none; overflow: auto; }
+.st-status, .st-err { align-items: flex-start; }
+.st-status span, .st-err span { min-width: 0; overflow-wrap: anywhere; }
+.st-err [data-a=replace], .st-status .spin { flex: none; }

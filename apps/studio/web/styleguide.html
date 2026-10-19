@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gfx studio · Style guide</title>
+<link rel="stylesheet" href="./src/theme/primitives.css">
+<link rel="stylesheet" href="./src/theme/scale.css">
+<link rel="stylesheet" href="./src/theme/dark.css">
+<link rel="stylesheet" href="./src/theme/light.css">
+<link rel="stylesheet" href="./src/theme/components.css">
+<link rel="stylesheet" href="./src/theme/density.css">
+<link rel="stylesheet" href="./src/styles.css">
+<link rel="stylesheet" href="./src/toolbar.css">
+<link rel="stylesheet" href="./src/comments.css">
+<link rel="stylesheet" href="./src/layers.css">
+<link rel="stylesheet" href="./src/paths.css">
+<link rel="stylesheet" href="./src/render.css">
+<link rel="stylesheet" href="./src/claude.css">
+<link rel="stylesheet" href="./src/code.css">
+<link rel="stylesheet" href="./src/layout.css">
+<link rel="stylesheet" href="./src/menu.css">
+<link rel="stylesheet" href="./src/settings.css">
+<link rel="stylesheet" href="./src/t3.css">
+<link rel="stylesheet" href="./src/newscene.css">
+<link rel="stylesheet" href="./src/library.css">
+<link rel="stylesheet" href="./src/welcome.css">
+<link rel="stylesheet" href="./src/styleguide.css">
+</head>
+<body class="sg" data-density="comfortable" data-compare="both">
+<header class="sg-header">
+  <div><h1>gfx studio <span class="dim">/ Style guide</span></h1><p>Shared components, real feature styles. Agpy checks the centre and descenders.</p></div>
+  <div class="sg-tools">
+    <div class="seg" id="sg-theme" aria-label="Preview theme"><button type="button" data-theme-choice="dark" class="on" aria-pressed="true">Dark</button><button type="button" data-theme-choice="light" aria-pressed="false">Light</button></div>
+    <label>Density <select id="sg-density"><option value="both">Compare both</option><option value="comfortable">Comfortable</option><option value="dense">Dense</option></select></label>
+    <label class="chk"><input type="checkbox" id="sg-centres">Centre lines</label>
+  </div>
+  <div class="sg-readout" id="sg-readout">
+    <output id="sg-max">Waiting for fonts…</output>
+    <p>Dashed blue: inner box centre. Solid amber: cap/ascender-to-baseline centre.
+      Deviation = |space above the cap/ascender top − space below the baseline| / 2; descenders are excluded.
+      Readings show those above / below spaces in CSS pixels.
+      Worst ten single-line labels below; native field text uses a Range mirror and an estimated browser baseline.
+      Multi-line and top-aligned labels are listed separately and excluded from the maximum.</p>
+    <ol id="sg-worst"></ol>
+    <details><summary>multi-line (not centred by design)</summary><ol id="sg-multiline"></ol></details>
+  </div>
+</header>
+<nav id="sg-nav" class="sg-nav" aria-label="Style guide sections"></nav>
+<main id="sg-content"></main>
+<script type="module" src="./src/styleguide.js"></script>
+</body>
+</html>

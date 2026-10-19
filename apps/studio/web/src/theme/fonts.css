@@ -1,0 +1,605 @@
+/* Local OFL faces; licenses live beside the bundled font files. */
+/* Extra subsets (latin-ext, cyrillic: fontsource; symbols: subset of Inter 4.1 arrows/math/shapes) load only
+   when a page uses those characters; each clone keeps its family's metric overrides. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/inter-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/inter-latin-ext-400-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/inter-symbols-400-normal.woff2') format('woff2');
+  unicode-range: U+2190-21FF, U+2200-22FF, U+2300-23FF, U+25A0-25FF, U+2600-27BF;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/inter-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/inter-latin-ext-500-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/inter-symbols-500-normal.woff2') format('woff2');
+  unicode-range: U+2190-21FF, U+2200-22FF, U+2300-23FF, U+25A0-25FF, U+2600-27BF;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/inter-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/inter-latin-ext-600-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/inter-symbols-600-normal.woff2') format('woff2');
+  unicode-range: U+2190-21FF, U+2200-22FF, U+2300-23FF, U+25A0-25FF, U+2600-27BF;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./fonts/inter-latin-700-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./fonts/inter-latin-ext-700-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./fonts/inter-symbols-700-normal.woff2') format('woff2');
+  unicode-range: U+2190-21FF, U+2200-22FF, U+2300-23FF, U+25A0-25FF, U+2600-27BF;
+  ascent-override: 101%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-ext-400-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-cyrillic-400-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-ext-500-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-cyrillic-500-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-ext-600-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-cyrillic-600-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+/* Text fields: Chromium places single-line field text from the font's rounded ascent/descent and ignores the
+   author line-height (measured). ascent-override 96.1% makes round(ascent) − round(descent) = rendered cap height
+   at 11/12/14px (valid range 95.84–96.42%); Inter's own 96.875% left 14px fields 0.88px low. Measured ≤ 0.12px.
+   Controls use "Inter" with the overrides above (flex centring + baseline snapping). */
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/inter-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/inter-latin-ext-400-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/inter-symbols-400-normal.woff2') format('woff2');
+  unicode-range: U+2190-21FF, U+2200-22FF, U+2300-23FF, U+25A0-25FF, U+2600-27BF;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/inter-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/inter-latin-ext-500-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/inter-symbols-500-normal.woff2') format('woff2');
+  unicode-range: U+2190-21FF, U+2200-22FF, U+2300-23FF, U+25A0-25FF, U+2600-27BF;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/inter-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/inter-latin-ext-600-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/inter-symbols-600-normal.woff2') format('woff2');
+  unicode-range: U+2190-21FF, U+2200-22FF, U+2300-23FF, U+25A0-25FF, U+2600-27BF;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./fonts/inter-latin-700-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./fonts/inter-latin-ext-700-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 96.1%;
+}
+@font-face {
+  font-family: "Inter Field";
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./fonts/inter-symbols-700-normal.woff2') format('woff2');
+  unicode-range: U+2190-21FF, U+2200-22FF, U+2300-23FF, U+25A0-25FF, U+2600-27BF;
+  ascent-override: 96.1%;
+}
+
+/* Monospace values inside text fields (number inputs, timecodes) centre with these metrics; labels (kbd, chips)
+   use "IBM Plex Mono Label" below, tuned for flex centring + baseline snapping (measured). */
+@font-face {
+  font-family: "IBM Plex Mono Field";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 99.9%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Field";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-ext-400-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 99.9%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Field";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-cyrillic-400-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 99.9%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Field";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 99.9%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Field";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-ext-500-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 99.9%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Field";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-cyrillic-500-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 99.9%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Field";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 99.9%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Field";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-ext-600-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 99.9%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Field";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-cyrillic-600-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 99.9%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+
+/* Single-line Plex Label uses measured ascent 1.070em / descent .301em.
+   The Field face above uses .999em / .301em for its full-height input line box.
+   These are separate browser-calibrated metrics; glyph outlines, advances and files stay identical. */
+@font-face {
+  font-family: "IBM Plex Mono Label";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 107%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Label";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-ext-400-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 107%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Label";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-cyrillic-400-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 107%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Label";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 107%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Label";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-ext-500-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 107%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Label";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-cyrillic-500-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 107%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Label";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  ascent-override: 107%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Label";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-latin-ext-600-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  ascent-override: 107%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "IBM Plex Mono Label";
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('./fonts/ibm-plex-mono-cyrillic-600-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  ascent-override: 107%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+}

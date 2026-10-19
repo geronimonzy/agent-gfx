@@ -1,0 +1,23 @@
+#!/bin/sh
+# gfx launcher: runs the engine CLI with the bundled node (<engine>/node/node) if present, else node on PATH.
+# Works from any cwd and through symlinks. Run in WSL from the Windows engine, it hands over to the WSL engine.
+self="$0"
+while [ -h "$self" ]; do
+  d=$(cd "$(dirname "$self")" && pwd -P)
+  l=$(readlink "$self")
+  case "$l" in /*) self="$l" ;; *) self="$d/$l" ;; esac
+done
+bin=$(cd "$(dirname "$self")" && pwd -P)
+engine=$(dirname "$bin")
+if [ -f "$engine/node/node.exe" ] && [ "$(uname -s)" = Linux ]; then
+  # the Windows engine reached from WSL (the Windows PATH is appended there): its packages are Windows builds
+  wsl_gfx="$HOME/.local/share/gfx/engine/bin/gfx"
+  if [ -x "$wsl_gfx" ]; then exec "$wsl_gfx" "$@"; fi
+  echo "gfx: this is the Windows engine ($engine); it does not run inside WSL." >&2
+  echo "Install the WSL engine: gfx studio > Settings > Engine & tools > Install WSL engine..." >&2
+  exit 1
+fi
+if [ -x "$engine/node/node" ]; then node="$engine/node/node"
+elif [ -f "$engine/node/node.exe" ]; then node="$engine/node/node.exe"   # Windows bash shells (MSYS)
+else node=node; fi
+exec "$node" "$engine/runner/cli.js" "$@"

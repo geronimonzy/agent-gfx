@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gfx studio</title>
+<link rel="stylesheet" href="./src/theme/primitives.css">
+<link rel="stylesheet" href="./src/theme/scale.css">
+<link rel="stylesheet" href="./src/theme/dark.css">
+<link rel="stylesheet" href="./src/theme/light.css">
+<link rel="stylesheet" href="./src/theme/components.css">
+<link rel="stylesheet" href="./src/theme/density.css">
+<link rel="stylesheet" href="./src/styles.css">
+<link rel="stylesheet" href="./src/menu.css">
+<link rel="stylesheet" href="./src/welcome.css">
+</head>
+<body data-density="comfortable" class="wl-body">
+<!-- Welcome window (docs/HOME-SETTINGS.md §1): its own native window in the app (label "welcome"), a page in the dev shim. -->
+<div id="wl">
+  <aside class="wl-side">
+    <div class="wl-brand"><span class="logo"></span><b>gfx studio</b><small id="wl-version"></small></div>
+    <nav class="wl-actions" aria-label="Start">
+      <button type="button" class="wl-act primary" data-a="new"><b>New project</b><small>Pick a template, name it</small></button>
+      <button type="button" class="wl-act" data-a="open"><b>Open folder…</b><small>A project, or a folder of projects</small></button>
+      <button type="button" class="wl-act" data-a="add-folder"><b>Add folder of projects…</b><small>Listed under Folders</small></button>
+    </nav>
+    <p class="wl-hint" id="wl-drop-hint">or drop a folder on this window</p>
+  </aside>
+  <main class="wl-main"><div class="wl-pane" id="wl-pane"></div></main>
+  <footer class="wl-status" id="wl-status" aria-label="Setup status"></footer>
+</div>
+<div id="wl-drop" hidden><div>Drop a folder to open it</div></div>
+<div id="toast" hidden></div>
+<script type="module" src="./src/welcome.js"></script>
+</body>
+</html>

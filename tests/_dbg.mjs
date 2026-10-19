@@ -1,0 +1,15 @@
+import puppeteer from 'puppeteer-core';
+const base = process.argv[2];
+const b = await puppeteer.launch({ executablePath: '/usr/bin/google-chrome', headless: true, args: ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'], defaultViewport: null });
+const p = await b.newPage();
+await p.setViewport({ width: 1080, height: 1920 });
+await p.goto(`${base}/runner/player/index.html?scene=_reel-test&capture=1`);
+await p.evaluate(() => window.__gfx.ready);
+await p.evaluate(() => window.__gfx.seek(7.61));
+console.log(JSON.stringify(await p.evaluate(() => ({ warn: window.__gfx.warnings, n: window.__gfx.elements().length, els: window.__gfx.elements().map((e) => e.key).join(' ') }))));
+const b0 = await p.evaluate(() => window.__gfx.bounds(['total', 'chip-0', 'phone']));
+await p.evaluate(() => window.__gfx.setTweaks({ total: { x: 100, y: -50, rotate: 10, scale: 1.2 }, 'chip-0': { x: 40 } }));
+const b1 = await p.evaluate(() => window.__gfx.bounds(['total', 'chip-0', 'phone']));
+console.log(JSON.stringify({ b0, b1 }));
+console.log(JSON.stringify(await p.evaluate(() => window.__gfx.pick(540, 1365).stack.slice(0, 4).map((e) => e.key + ' ' + e.label))));
+await b.close();

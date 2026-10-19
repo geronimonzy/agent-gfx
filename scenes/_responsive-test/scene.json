@@ -1,0 +1,1 @@
+{ "kind": "canvas", "width": 400, "height": 300, "fps": 10, "duration": 1, "style": "dark-grid", "responsive": true, "title": "responsive fixture (tests/render.test.mjs)" }

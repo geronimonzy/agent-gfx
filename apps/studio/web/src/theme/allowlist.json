@@ -1,0 +1,22 @@
+[
+  {
+    "file": "render.js",
+    "match": "pad: '#000000'",
+    "reason": "Export padding is scene output data and must remain black in either UI theme."
+  },
+  {
+    "file": "elements.js",
+    "match": "i.value = t[k] ?? '#000000'",
+    "reason": "Colour input fallback is scene edit data, not interface styling."
+  },
+  {
+    "file": "library-core.test.js",
+    "match": "const preset = \"export default {\\n  name: 'dark-grid',\\n  colors: {\\n    bg: '#111111',\\n    accent: \\\"#d97757\\\",\\n    soft: 'rgba(0,0,0,.2)',\\n  },\\n  radius: 8,\\n};\";",
+    "reason": "Fixture containing scene preset source colours exercises swatch parsing."
+  },
+  {
+    "file": "library-core.test.js",
+    "match": "assert.deepEqual(presetSwatches(preset), [{ key: 'bg', hex: '#111111' }, { key: 'accent', hex: '#d97757' }]);",
+    "reason": "Expected scene preset swatch content, matching the source fixture."
+  }
+]

@@ -1,0 +1,111 @@
+/* Claude in the app (terminal.js, ask.js, settings.js, pulse.js): dock tabs, terminals, Ask Claude composer, settings */
+
+/* terminal panel: its own tab strip (one tab per terminal) above the xterm panes */
+#terminal { display: flex; flex-direction: column; background: var(--background); }
+#term-tabs { display: flex; align-items: stretch; gap: var(--space-2); height: calc(var(--control-h) + var(--space-1)); overflow-x: auto; scrollbar-width: none; padding: 0 var(--space-8); background: var(--card); border-bottom: var(--space-1) solid var(--border); flex: none; font-size: var(--text-2xs); }
+.dk-term { font-size: var(--text-2xs); height: var(--control-h); font-weight: 500; line-height: var(--control-leading); display: inline-flex; align-items: center; gap: var(--gap-1); padding-inline: var(--space-10); background: none; border: 0; color: var(--muted-foreground); cursor: pointer; white-space: nowrap; }
+.dk-term:is(:hover, .is-hover) { color: var(--foreground); background: var(--accent); }
+.dk-term.on { color: var(--foreground); box-shadow: inset 0 calc(-1 * var(--tab-indicator)) 0 var(--primary); }
+.dk-term { padding-right: var(--space-4); }
+.dk-dot { width: var(--space-6); height: var(--space-6); border-radius: var(--radius-round); background: var(--stem-hits); flex: none; }
+.dk-term.claude .dk-dot { background: var(--claude); box-shadow: 0 0 0 var(--space-2) var(--error-surface); }
+.dk-term.dead { color: var(--muted-foreground); }
+.dk-term.dead .dk-dot { background: var(--muted-foreground); box-shadow: none; }
+.dk-x { width: var(--space-18); height: var(--space-18); display: inline-grid; place-items: center; padding-inline: 0; border: 0; border-radius: var(--radius-sm); background: none; color: var(--muted-foreground); font-size: var(--text-sm); line-height: var(--control-leading); visibility: hidden; }
+.dk-term:is(:hover, .is-hover) .dk-x, .dk-term.on .dk-x { visibility: visible; }
+.dk-x:hover { background: var(--accent); color: var(--foreground); }
+.dk-add { width: var(--space-26); padding-inline: 0; border: 0; background: none; color: var(--muted-foreground); font-size: var(--text-base); cursor: pointer; }
+.dk-add:hover { color: var(--foreground); background: var(--accent); }
+.dk-hint { align-self: center; color: var(--muted-foreground); font-size: var(--text-2xs); }
+
+#term-host { position: relative; flex: 1; min-height: 0; background: var(--background); }
+#term-empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-10); color: var(--muted-foreground); }
+.te-btns { display: flex; gap: var(--space-8); }
+.te-btns .tbtn { display: inline-flex; align-items: center; gap: var(--space-6); }
+.term-pane { position: absolute; inset: var(--space-6) var(--space-4) var(--space-4) var(--space-10); }
+.term-pane .xterm { height: 100%; }
+
+/* top bar */
+.claude-btn { display: inline-flex; align-items: center; gap: var(--gap-1); }
+.cl-mark { width: calc(var(--space-8) + var(--space-1)); height: calc(var(--space-8) + var(--space-1)); background: var(--claude); clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); }
+.claude-chip { background: var(--error-surface); border-color: var(--error-border); color: var(--claude); }
+.claude-chip i { width: var(--space-8); height: var(--space-8); border-radius: var(--radius-round); background: var(--claude); animation: cl-blink var(--motion-record-pulse) ease-in-out infinite; }
+.crumb-scene.claude-pulse { animation: cl-pulse var(--motion-claude-pulse) ease-out 4; border-color: var(--claude); }
+@keyframes cl-pulse { 0% { box-shadow: 0 0 0 0 var(--error-border); } 100% { box-shadow: 0 0 0 calc(var(--space-8) + var(--space-1)) var(--error-surface); } }
+@keyframes cl-blink { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .crumb-scene.claude-pulse, .claude-chip i { animation: none; } }
+
+/* sent-to-T3 marker */
+.t3-sent { font-style: normal; color: var(--info-foreground); font-size: var(--text-3xs); }
+#np-sent { align-self: center; font-size: var(--text-xs); }
+.ask-row { padding: var(--space-4) var(--space-14) var(--space-8); }
+.ask-row .tbtn { width: 100%; }
+.rq-ask { align-self: flex-start; margin-top: var(--space-2); }
+
+/* modal dialogs */
+.modal-head { display: flex; align-items: center; gap: var(--space-10); }
+.modal-head b { font-size: var(--text-sm); }
+.modal-head .link { font-size: var(--text-lg); text-decoration: none; }
+.modal-foot { display: flex; align-items: center; gap: var(--space-8); padding-top: var(--space-4); }
+.modal-foot .primary { height: var(--control-h); }
+.modal .tbtn.unset { opacity: .55; }
+.ask-src { --leading: var(--leading-normal-mono); font: var(--text-2xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); color: var(--stem-note); }
+.ask-brief-h { display: flex; align-items: baseline; gap: var(--space-8); font-size: var(--text-3xs); letter-spacing: .09em; text-transform: uppercase; color: var(--muted-foreground); }
+.ask-brief-h small { text-transform: none; letter-spacing: 0; color: var(--muted-foreground); }
+.ask-brief { margin: 0; height: var(--ask-brief-max-h); min-height: var(--ask-brief-max-h); max-height: var(--ask-brief-max-h); overflow: auto; font: var(--text-2xs)/round(nearest, calc(var(--textarea-leading-prose) * 1em), var(--space-1)) var(--font-mono); color: var(--foreground); background: var(--background); border: var(--space-1) solid var(--border); border-radius: var(--radius-control); padding: var(--space-8) var(--space-10); white-space: pre-wrap; word-break: break-word; }
+.ask-brief.busy { color: var(--muted-foreground); }
+.ask-msg { width: 100%; height: auto; resize: vertical; min-height: var(--ask-message-min-h); font-size: var(--text-xs); font-weight: 400; font-family: var(--font-sans); --leading: var(--textarea-leading-prose); line-height: round(nearest, calc(var(--leading) * 1em), var(--leading-step)); padding: calc(var(--space-6) + var(--space-1)) calc(var(--space-8) + var(--space-1)); }
+
+/* settings */
+.st-sec { display: flex; flex-direction: column; gap: var(--space-8); padding: var(--space-8) 0 var(--space-10); border-bottom: var(--space-1) solid var(--border); }
+.st-sec h4 { margin: 0; font-size: var(--text-3xs); font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--muted-foreground); }
+.st-row { display: flex; align-items: center; gap: var(--space-10); padding-left: var(--settings-legacy-indent); }
+.st-msg { font-size: var(--text-2xs); color: var(--muted-foreground); }
+.st-msg.ok { color: var(--stem-hits); }
+.st-msg.bad { color: var(--error-foreground); }
+.st-hint { margin: 0; color: var(--muted-foreground); font-size: var(--text-2xs); --leading: var(--leading-loose); line-height: round(nearest, calc(var(--leading) * 1em), var(--leading-step)); }
+.st-hint code { --leading: var(--leading-normal-mono); font: var(--text-2xs)/round(nearest, calc(var(--leading) * 1em), var(--leading-step)) var(--font-mono); color: var(--foreground); }
+.st-err { color: var(--error-foreground); font-size: var(--text-2xs); }
+
+/* shortcut help overlay (keys-help.js) */
+.modal.kh { width: min(var(--dialog-w-help), calc(100vw - var(--dialog-viewport-gap))); height: min(var(--help-dialog-h), calc(100vh - var(--dialog-viewport-block-gap))); }
+.kh .kh-now { font-size: var(--text-2xs); color: var(--muted-foreground); display: flex; gap: calc(var(--space-4) + var(--space-1)); align-items: center; flex-wrap: wrap; }
+.kh .kh-q { width: 100%; box-sizing: border-box; height: var(--control-h); background: var(--code-background); border: var(--space-1) solid var(--border); border-radius: var(--radius-control); color: var(--foreground, var(--foreground)); padding-inline: calc(var(--space-8) + var(--space-1)); font-size: var(--text-xs); font-weight: 400; font-family: var(--font-sans); line-height: var(--control-leading); }
+.kh .kh-q:focus-visible { border-color: var(--primary); }
+.kh .kh-body { flex: 1; overflow: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--space-26); align-content: start; padding-right: var(--space-4); }
+.kh .kh-g { margin-bottom: var(--space-14); min-width: 0; }
+.kh .kh-g h4 { margin: 0 0 var(--space-4); font-size: var(--text-2xs); letter-spacing: .08em; text-transform: uppercase; color: var(--primary); font-weight: 600; }
+.kh .kh-r { display: grid; grid-template-columns: var(--help-shortcut-w) 1fr auto; gap: var(--space-8); align-items: baseline; padding: calc(var(--space-2) + var(--space-1)) var(--space-6); border-radius: var(--radius-sm); font-size: var(--text-xs); }
+.kh .kh-r.now { background: var(--selection); }
+.kh .kh-r.doc .kh-k kbd { color: var(--muted-foreground); }
+.kh .kh-k { white-space: nowrap; }
+.kh .kh-k kbd { margin: 0; font-size: var(--text-2xs); color: var(--foreground); background: var(--code-background); --control-pad-block: var(--space-1); padding-inline: calc(var(--space-4) + var(--space-1)); }
+.kh .kh-k b, .kh .kh-k i { color: var(--muted-foreground); font-style: normal; font-weight: 400; margin: 0 calc(var(--space-2) + var(--space-1)); font-size: var(--text-3xs); }
+.kh .kh-l { color: var(--foreground); }
+.kh .kh-ctx { font-size: var(--text-3xs); color: var(--muted-foreground); border: var(--space-1) solid var(--border); border-radius: var(--pill-radius); padding-inline: var(--space-6); white-space: nowrap; }
+.kh .kh-ctx.on { color: var(--primary-text); border-color: var(--primary-border); }
+.kh .kh-none { color: var(--muted-foreground); padding: var(--space-20) var(--space-4); }
+.kh .kh-foot { font-size: var(--text-2xs); color: var(--muted-foreground); }
+
+/* ---- Ask Claude: source choice (all open comments) ---- */
+.ask-source { font-size: var(--text-2xs); color: var(--muted-foreground); }
+.ask-source select { background-color: var(--card); color: var(--foreground, inherit); border: var(--space-1) solid var(--border); border-radius: var(--radius-sm); --control-pad-block: var(--space-2); padding-inline: var(--space-4) var(--field-pad-end); font-weight: inherit; line-height: var(--field-leading); }
+.ask-row .tbtn b { font-weight: 600; }
+#ask-dlg.modal-back { z-index: var(--z-modal-backdrop); } /* above dockview's sashes: the composer grew taller and a sash cut through its buttons */
+
+/* Keep the list's original 16px leading; keycaps remain inline so separators keep auto sizing. */
+.kh .kh-r { align-items: start; line-height: var(--help-row-leading); }
+.kh .kh-r :is(.kh-k, .kh-l) { line-height: inherit; }
+.kh .kh-k { min-height: var(--help-row-leading); }
+.kh .kh-k kbd { --kbd-h: var(--settings-search-key-h); padding-block: 0; vertical-align: top; }
+
+/* The header's even action box centres even text lines without moving individual descendants. */
+.modal-head { --leading-step: var(--space-2); }
+/* Mixed-size baseline alignment gives fractional text origins. Even lines and a whole margin box share a centre. */
+.ask-brief-h { align-items: center; --leading-step: var(--space-2); }
+.ask-brief-h .link { margin-block-end: var(--space-1); }
+
+
+.ask-brief-h small { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ask-brief-h > :not(small, .spacer) { flex-shrink: 0; }
+.ask { overflow: auto; }
